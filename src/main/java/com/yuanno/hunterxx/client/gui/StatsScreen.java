@@ -82,7 +82,6 @@ public class StatsScreen extends Screen {
         this.entityStats = EntityStatsCapability.get(player);
         Button health = new Button(guiLeft + 27, guiTop - 50, 9, 9, new TranslationTextComponent("+"), b ->
         {
-            //points -= 1;
             if (this.entityStats.getLevelPoints() > 0)
             {
                 PacketHandler.sendToServer(new CStatsCCPacket(entityStats.getLevelPoints() - 1, entityStats.getHealth() + 1, entityStats.getStrength(), entityStats.getDefense(), entityStats.getSpeed()));
@@ -91,21 +90,27 @@ public class StatsScreen extends Screen {
         });
         Button strength = new Button(guiLeft + 27, guiTop - 40, 9, 9, new TranslationTextComponent("+"), b ->
         {
-            int points = this.entityStats.getLevelPoints();
-            //points -= 1;
-            PacketHandler.sendToServer(new CStatsCCPacket(entityStats.getLevelPoints() - 1, entityStats.getHealth(), entityStats.getStrength() + 1, entityStats.getDefense(), entityStats.getSpeed()));
+            if (this.entityStats.getLevelPoints() > 0)
+            {
+                PacketHandler.sendToServer(new CStatsCCPacket(entityStats.getLevelPoints() - 1, entityStats.getHealth(), entityStats.getStrength() + 1, entityStats.getDefense(), entityStats.getSpeed()));
+                PacketHandler.sendToServer(new CAttributePacket(2));
+            }
         });
         Button defense = new Button(guiLeft + 27, guiTop - 30, 9, 9, new TranslationTextComponent("+"), b ->
         {
-            int points = this.entityStats.getLevelPoints();
-            //points -= 1;
-            PacketHandler.sendToServer(new CStatsCCPacket(entityStats.getLevelPoints() - 1, entityStats.getHealth() , entityStats.getStrength(), entityStats.getDefense() + 1, entityStats.getSpeed()));
+            if (this.entityStats.getLevelPoints() > 0)
+            {
+                PacketHandler.sendToServer(new CStatsCCPacket(entityStats.getLevelPoints() - 1, entityStats.getHealth(), entityStats.getStrength(), entityStats.getDefense() + 1, entityStats.getSpeed()));
+                PacketHandler.sendToServer(new CAttributePacket(3));
+            }
         });
         Button speed = new Button(guiLeft + 27, guiTop - 20, 9, 9, new TranslationTextComponent("+"), b ->
         {
-            int points = this.entityStats.getLevelPoints();
-            //points -= 1;
-            PacketHandler.sendToServer(new CStatsCCPacket(entityStats.getLevelPoints() - 1, entityStats.getHealth(), entityStats.getStrength(), entityStats.getDefense(), entityStats.getSpeed() + 1));
+            if (this.entityStats.getLevelPoints() > 0)
+            {
+                PacketHandler.sendToServer(new CStatsCCPacket(entityStats.getLevelPoints() - 1, entityStats.getHealth(), entityStats.getStrength(), entityStats.getDefense(), entityStats.getSpeed() + 1));
+                PacketHandler.sendToServer(new CAttributePacket(4));
+            }
         });
         //statsButton = statsButton.setIconInfo(backButton, posX + 50, posY + 170, 1);
         //statsButton = statsButton.setTextInfo(posX + 50, posY + 180, 0.85);
@@ -148,17 +153,18 @@ public class StatsScreen extends Screen {
         drawString(matrixStack, font, TextFormatting.LIGHT_PURPLE + "Strength:" , guiLeft - 40, guiTop - 40, 16777215);
         drawString(matrixStack, font, TextFormatting.BLUE + "Defense:" , guiLeft - 40, guiTop - 30, 16777215);
         drawString(matrixStack, font, TextFormatting.YELLOW + "Speed:" , guiLeft - 40, guiTop - 20, 16777215);
-        drawString(matrixStack, font, ""  + health, guiLeft + 20, guiTop - 50, 16777215);
-        drawString(matrixStack, font, "" + strength, guiLeft + 20, guiTop - 40, 16777215);
-        drawString(matrixStack, font, "" + defense, guiLeft + 20, guiTop - 30, 16777215);
-        drawString(matrixStack, font, "" + speed, guiLeft + 20, guiTop - 20, 16777215);
+        drawString(matrixStack, font, ""  + health, guiLeft + 30, guiTop - 50, 16777215);
+        drawString(matrixStack, font, "" + strength, guiLeft + 30, guiTop - 40, 16777215);
+        drawString(matrixStack, font, "" + defense, guiLeft + 30, guiTop - 30, 16777215);
+        drawString(matrixStack, font, "" + speed, guiLeft + 30, guiTop - 20, 16777215);
 
         if (stats.getNen() > 0) // -> Hasn't unlocked Nen yet
         {
+            /*
             drawString(matrixStack, font, TextFormatting.WHITE  + "Hatsu: " + TextFormatting.RESET + nen, guiLeft - 40, guiTop, 16777215);
             drawString(matrixStack, font, TextFormatting.WHITE + "Strength: " + TextFormatting.RESET + auraMax, guiLeft - 40, guiTop + 10, 16777215);
             drawString(matrixStack, font, TextFormatting.WHITE + "Defense: " + TextFormatting.RESET + auraRegeneration, guiLeft - 40, guiTop + 20, 16777215);
-
+             */
         }
     }
 

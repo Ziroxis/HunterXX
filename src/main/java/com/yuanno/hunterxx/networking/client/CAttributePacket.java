@@ -64,6 +64,30 @@ public class CAttributePacket {
                     health.removeModifier(healthUUID);
                     health.addPermanentModifier(healthModifier);
                 }
+                else if (msg.attributes == 2)
+                {
+                    UUID strengthUUID = attack_attributemodifier_uuid;
+                    AttributeModifier strengthModifier = new AttributeModifier(strengthUUID, "attackStatIncrease", entityStats.getStrength() * 0.5, AttributeModifier.Operation.ADDITION);
+
+                    strength.removeModifier(strengthModifier);
+                    strength.addPermanentModifier(strengthModifier);
+                }
+                else if (msg.attributes == 3)
+                {
+                    UUID defenseUUID = defense_attributemodifier_uuid;
+                    AttributeModifier defenseModifier = new AttributeModifier(defenseUUID, "defenseStatIncrease", entityStats.getDefense() * 0.5, AttributeModifier.Operation.ADDITION);
+
+                    defense.removeModifier(defenseModifier);
+                    defense.addPermanentModifier(defenseModifier);
+                }
+                else if (msg.attributes == 4)
+                {
+                    UUID speedUUID = speed_attributemodifier_uuid;
+                    AttributeModifier speedModifier = new AttributeModifier(speedUUID, "speedStatIncrease", entityStats.getSpeed() * 0.05, AttributeModifier.Operation.ADDITION);
+
+                    speed.removeModifier(speedModifier);
+                    speed.addPermanentModifier(speedModifier);
+                }
             });
         }
         ctx.get().setPacketHandled(true);
