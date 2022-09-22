@@ -2,6 +2,7 @@ package com.yuanno.hunterxx.client.gui;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.yuanno.hunterxx.Main;
+import com.yuanno.hunterxx.api.TexturedIconButton;
 import com.yuanno.hunterxx.networking.PacketHandler;
 import com.yuanno.hunterxx.networking.client.CRequestSyncWorldDataPacket;
 import net.minecraft.client.Minecraft;
@@ -44,7 +45,7 @@ public class OverViewScreen extends Screen {
         guiLeft = (this.width - this.xSize) / 2;
         guiTop = (this.height - this.ySize) / 2;
 
-        int posX = ((this.width - 256) / 2);
+        int posX = (this.width - 256) / 2;
         int posY = (this.height - 256) / 2;
 
         TexturedIconButton statsButton = new TexturedIconButton(basicButton, posX + 60, posY + 50, 64, 16, new TranslationTextComponent("gui.hunterxx.stats"), b ->
@@ -52,6 +53,25 @@ public class OverViewScreen extends Screen {
            Minecraft.getInstance().setScreen(new StatsScreen(this.player));
         });
         statsButton = statsButton.setTextInfo(posX + 70, posY + 48, 0.95);
+        TexturedIconButton questButton = new TexturedIconButton(basicButton, posX + 60, posY + 70, 64, 16, new TranslationTextComponent("gui.hunterxx.quests"), b ->
+        {
+            Minecraft.getInstance().setScreen(new QuestScreen(this.player));
+        });
+        questButton = questButton.setTextInfo(posX + 70, posY + 68, 0.95);
+        TexturedIconButton achievementsButton = new TexturedIconButton(basicButton, posX + 60, posY + 90, 64, 16, new TranslationTextComponent("gui.hunterxx.achievements"), b ->
+        {
+            Minecraft.getInstance().setScreen(new AchievementsScreen(player));
+        });
+        achievementsButton = achievementsButton.setTextInfo(posX + 58, posY + 88, 0.95);
+        TexturedIconButton abilitiesButton = new TexturedIconButton(basicButton, posX + 60, posY + 110, 64, 16, new TranslationTextComponent("gui.hunterxx.abilities"), b ->
+        {
+            Minecraft.getInstance().setScreen(new SelectHotbarAbilitiesScreen(player));
+        });
+        abilitiesButton = abilitiesButton.setTextInfo(posX + 70, posY + 108, 0.95);
+
+        this.addButton(abilitiesButton);
+        this.addButton(achievementsButton);
+        this.addButton(questButton);
         this.addButton(statsButton);
     }
 

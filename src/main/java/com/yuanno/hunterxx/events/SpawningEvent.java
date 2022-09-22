@@ -2,10 +2,15 @@ package com.yuanno.hunterxx.events;
 
 import com.yuanno.hunterxx.Main;
 import com.yuanno.hunterxx.api.Beapi;
+import com.yuanno.hunterxx.data.ability.AbilityDataCapability;
+import com.yuanno.hunterxx.data.ability.IAbilityData;
 import com.yuanno.hunterxx.data.entity.EntityStatsCapability;
 import com.yuanno.hunterxx.data.entity.IEntityStats;
+import com.yuanno.hunterxx.data.quest.IQuestData;
+import com.yuanno.hunterxx.data.quest.QuestDataCapability;
 import com.yuanno.hunterxx.init.ModValues;
 import com.yuanno.hunterxx.networking.PacketHandler;
+import com.yuanno.hunterxx.networking.server.SSyncAbilityDataPacket;
 import com.yuanno.hunterxx.networking.server.SSyncEntityStatsPacket;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.nbt.CompoundNBT;
@@ -22,6 +27,7 @@ public class SpawningEvent {
     {
         PlayerEntity player = event.getPlayer();
         IEntityStats stats = EntityStatsCapability.get(player);
+        IAbilityData abilityData = AbilityDataCapability.get(player);
 
         if (stats.getCategory().isEmpty())
         {
@@ -33,9 +39,9 @@ public class SpawningEvent {
 
             // NEN
             stats.setCategory(Beapi.randomizer(ModValues.CATEGORIES));
-            stats.setAura(0);
+            stats.setAura(50);
             stats.setAuraRegeneration(0);
-            stats.setMaxAura(0);
+            stats.setMaxAura(50);
             stats.setNen(0);
 
             // STATS
@@ -46,6 +52,7 @@ public class SpawningEvent {
             System.out.println(stats.getCategory());
         }
         PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), stats), player);
+        PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityData), player);
     }
 
     @SubscribeEvent
@@ -53,7 +60,9 @@ public class SpawningEvent {
     {
         PlayerEntity player = event.getPlayer();
         IEntityStats stats = EntityStatsCapability.get(player);
+        IAbilityData abilityData = AbilityDataCapability.get(player);
         PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), stats), player);
+        PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityData), player);
     }
 
     @SubscribeEvent
@@ -76,6 +85,10 @@ public class SpawningEvent {
         nbt = EntityStatsCapability.INSTANCE.writeNBT(oldEntityStats, null);
         IEntityStats newEntityStats = EntityStatsCapability.get(player);
         EntityStatsCapability.INSTANCE.readNBT(newEntityStats, null, nbt);
+        IQuestData oldQuestData = QuestDataCapability.get(original);
+        nbt = QuestDataCapability.INSTANCE.writeNBT(oldQuestData, null);
+        IQuestData newQuestData = QuestDataCapability.get(player);
+        QuestDataCapability.INSTANCE.readNBT(newQuestData, null, nbt);
 
 
         // Keep the ability stats

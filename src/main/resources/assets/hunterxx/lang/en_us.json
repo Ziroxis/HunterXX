@@ -1,3 +1,6 @@
 {
-  "gui.hunterxx.stats": "Stats"
+  "gui.hunterxx.stats": "Stats",
+  "gui.hunterxx.quests": "Quests",
+  "gui.hunterxx.achievements": "Achievements",
+  "gui.hunterxx.abilities": "Abilities"
 }

@@ -1,8 +1,7 @@
-package com.yuanno.hunterxx.client.gui;
+package com.yuanno.hunterxx.api;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
-import com.yuanno.hunterxx.api.Beapi;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.widget.button.Button;

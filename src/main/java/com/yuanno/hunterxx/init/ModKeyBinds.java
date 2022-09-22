@@ -1,9 +1,15 @@
 package com.yuanno.hunterxx.init;
 
 import com.yuanno.hunterxx.Main;
+import com.yuanno.hunterxx.api.ability.Ability;
+import com.yuanno.hunterxx.data.ability.AbilityDataCapability;
+import com.yuanno.hunterxx.data.ability.IAbilityData;
+import com.yuanno.hunterxx.data.entity.EntityStatsCapability;
 import com.yuanno.hunterxx.data.entity.IEntityStats;
 import com.yuanno.hunterxx.networking.PacketHandler;
 import com.yuanno.hunterxx.networking.client.COpenOverviewScreenPacket;
+import com.yuanno.hunterxx.networking.client.CToggleCombatModePacket;
+import com.yuanno.hunterxx.networking.client.CUseAbilityPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.ClientPlayerEntity;
 import net.minecraft.client.settings.KeyBinding;
@@ -34,6 +40,12 @@ public class ModKeyBinds {
 
         combatMode = new KeyBinding("Keys.HunterXX.combat_mode", 41, "Keys.HunterXX.combat");
         ClientRegistry.registerKeyBinding(combatMode);
+
+        nextCombatBar = new KeyBinding("Keys.HunterXX.next_bar", 42, "Keys.HunterXX.combat");
+        ClientRegistry.registerKeyBinding(nextCombatBar);
+        prevCombatBar = new KeyBinding("Keys.HunterXX.previous_bar", 43, "Keys.HunterXX.combat");
+        ClientRegistry.registerKeyBinding(prevCombatBar);
+
 
         combatSlot1 = new KeyBinding("Keys.HunterXX.combat_1", GLFW.GLFW_KEY_1, "Keys.HunterXX.combat");
         ClientRegistry.registerKeyBinding(combatSlot1);
@@ -128,12 +140,39 @@ public class ModKeyBinds {
 
     private static void checkKeybindings(PlayerEntity player)
     {
-        //TODO the combat stuff
+        IEntityStats entityStatsProps = EntityStatsCapability.get(player);
+        IAbilityData abilityDataProps = AbilityDataCapability.get(player);
+
         if (infoCard.isDown())
         {
             if (Minecraft.getInstance().screen != null)
                 return;
             PacketHandler.sendToServer(new COpenOverviewScreenPacket());
+        }
+        if (combatMode.isDown())
+        {
+            keybindsAssignment(entityStatsProps);
+        }
+
+        int j = keyBindsCombatbar.length;
+
+        for (int i = 0; i < j; i++)
+        {
+            if (keyBindsCombatbar[i].isDown())
+            {
+                int k = i + (abilityDataProps.getCombatBarSet() * 8);
+                Ability abl = abilityDataProps.getEquippedAbility(k);
+                if (entityStatsProps.getCombatMode() && abl != null)
+                {
+                    if((!abl.isOnCooldown() || abl.getCooldown() <= 10) && keyCooldown[i] <= 0)
+                    {
+                        PacketHandler.sendToServer(new CUseAbilityPacket(k));
+                        keyCooldown[i] = 5;
+                    }
+                }
+                else
+                    player.inventory.selected = i;
+            }
         }
     }
 
@@ -164,6 +203,6 @@ public class ModKeyBinds {
 
             KeyBinding.resetMapping();
         }
-        //PacketHandler.sendToServer(new CToggleCombatModePacket(entityStatsProps.getCombatMode()));
+        PacketHandler.sendToServer(new CToggleCombatModePacket(entityStatsProps.getCombatMode()));
     }
 }

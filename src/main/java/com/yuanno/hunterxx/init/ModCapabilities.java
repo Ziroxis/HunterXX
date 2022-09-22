@@ -1,8 +1,10 @@
 package com.yuanno.hunterxx.init;
 
 import com.yuanno.hunterxx.Main;
+import com.yuanno.hunterxx.data.ability.AbilityDataCapability;
 import com.yuanno.hunterxx.data.entity.EntityStatsCapability;
 import com.yuanno.hunterxx.data.entity.EntityStatsProvider;
+import com.yuanno.hunterxx.data.quest.QuestDataCapability;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.ResourceLocation;
@@ -16,6 +18,8 @@ public class ModCapabilities {
     public static void init()
     {
         EntityStatsCapability.register();
+        AbilityDataCapability.register();
+        QuestDataCapability.register();
     }
 
     @SubscribeEvent

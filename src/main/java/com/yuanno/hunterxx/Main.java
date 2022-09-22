@@ -1,16 +1,11 @@
 package com.yuanno.hunterxx;
 
-import com.yuanno.hunterxx.init.ModAttributes;
-import com.yuanno.hunterxx.init.ModCapabilities;
-import com.yuanno.hunterxx.init.ModKeyBinds;
-import com.yuanno.hunterxx.init.ModNetwork;
-import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
+import com.yuanno.hunterxx.client.handler.ClientHandler;
+import com.yuanno.hunterxx.data.AttachingCapability;
+import com.yuanno.hunterxx.init.*;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
-import net.minecraftforge.fml.InterModComms;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -20,8 +15,6 @@ import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
-import java.util.stream.Collectors;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod("hunterxx")
@@ -34,7 +27,12 @@ public class Main
     public Main() {
         final IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
+        MinecraftForge.EVENT_BUS.register(new AttachingCapability.Registry());
         ModAttributes.ATTRIBUTES.register(modEventBus);
+        ModQuests.QUESTS.register(modEventBus);
+        ModEntities.ENTITIES.register(modEventBus);
+        ModAbilities.register(modEventBus);
+
 
 
 
@@ -54,6 +52,7 @@ public class Main
 
     private void doClientStuff(final FMLClientSetupEvent event)
     {
+        ClientHandler.onSetup();
         ModKeyBinds.init();
     }
 

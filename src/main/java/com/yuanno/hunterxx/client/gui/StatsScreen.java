@@ -2,22 +2,17 @@ package com.yuanno.hunterxx.client.gui;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.yuanno.hunterxx.Main;
+import com.yuanno.hunterxx.api.TexturedIconButton;
 import com.yuanno.hunterxx.data.entity.EntityStatsCapability;
 import com.yuanno.hunterxx.data.entity.IEntityStats;
 import com.yuanno.hunterxx.networking.PacketHandler;
 import com.yuanno.hunterxx.networking.client.CAttributePacket;
 import com.yuanno.hunterxx.networking.client.CRequestSyncWorldDataPacket;
 import com.yuanno.hunterxx.networking.client.CStatsCCPacket;
-import com.yuanno.hunterxx.networking.server.SSyncEntityStatsPacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.gui.widget.button.Button;
-import net.minecraft.entity.ai.attributes.AttributeModifier;
-import net.minecraft.entity.ai.attributes.Attributes;
-import net.minecraft.entity.ai.attributes.ModifiableAttributeInstance;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.player.ServerPlayerEntity;
-import net.minecraft.network.play.server.SUpdateHealthPacket;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.util.text.TextFormatting;
@@ -27,7 +22,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.gui.GuiUtils;
 
 import java.util.UUID;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @OnlyIn(Dist.CLIENT)
 public class StatsScreen extends Screen {
@@ -35,6 +29,8 @@ public class StatsScreen extends Screen {
     protected PlayerEntity player;
     private final ResourceLocation overviewScreen = new ResourceLocation(Main.MODID, "textures/gui/overview.png");
     private final ResourceLocation backButton = new ResourceLocation(Main.MODID, "textures/gui/test.png");
+    private final ResourceLocation basicButton = new ResourceLocation(Main.MODID, "textures/gui/basic_button.png");
+
     private IEntityStats entityStats;
     private final int xSize = 64;
     private final int ySize = 58;
@@ -59,7 +55,7 @@ public class StatsScreen extends Screen {
         guiLeft = (this.width - this.xSize) / 2;
         guiTop = (this.height - this.ySize) / 2;
 
-        int posX = ((this.width - 256) / 2);
+        int posX = (this.width - 256) / 2;
         int posY = (this.height - 256) / 2;
         this.entityStats = EntityStatsCapability.get(player);
 
@@ -68,9 +64,9 @@ public class StatsScreen extends Screen {
             Minecraft.getInstance().setScreen(new OverViewScreen());
         });
         this.addButton(statsButton);
+
     }
 
-    //TODO make a packet for attributes
     @Override
     public void render(MatrixStack matrixStack, int x, int y, float f)
     {
@@ -79,7 +75,9 @@ public class StatsScreen extends Screen {
 
         this.renderBackground(matrixStack);
         overViewRendering(matrixStack);
+        super.render(matrixStack, x, y, f);
         this.entityStats = EntityStatsCapability.get(player);
+        //TODO get points by doing other stuff too and add extra attributes to the thingies
         Button health = new Button(guiLeft + 27, guiTop - 50, 9, 9, new TranslationTextComponent("+"), b ->
         {
             if (this.entityStats.getLevelPoints() > 0)
@@ -129,7 +127,6 @@ public class StatsScreen extends Screen {
         }
 
 
-        super.render(matrixStack, x, y, f);
     }
 
     public void overViewRendering(MatrixStack matrixStack) {

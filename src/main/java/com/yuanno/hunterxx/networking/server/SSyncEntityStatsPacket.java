@@ -68,8 +68,6 @@ public class SSyncEntityStatsPacket {
 
             IEntityStats props = EntityStatsCapability.get((LivingEntity) target);
             EntityStatsCapability.INSTANCE.getStorage().readNBT(EntityStatsCapability.INSTANCE, props, null, message.data);
-            System.out.println("Level points: " + props.getLevelPoints());
-            System.out.println("health: " + props.getHealth());
         }
     }
 }

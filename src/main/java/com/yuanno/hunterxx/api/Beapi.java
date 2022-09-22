@@ -285,6 +285,26 @@ public class Beapi
         return newText;
     }
 
+    /*
+    public static List<String> splitString(FontRenderer font, String text, int posX, int posY, int wrapWidth) {
+        while (text != null && text.endsWith("\n")) {
+            text = text.substring(0, text.length() - 1);
+        }
+
+        List<String> newText = new ArrayList<String>();
+        for (String s : font.plainSubstrByWidth(text, wrapWidth)) {
+            if (font.isBidirectional()) {
+                int i = font.width(font.bidirectionalShaping(s));
+                posX += wrapWidth - i;
+            }
+
+            newText.add(s);
+        }
+        return newText;
+    }
+
+     */
+
     public static void drawStringWithBorder(FontRenderer font, MatrixStack matrixStack, IReorderingProcessor text, int posX, int posY, int color)
     {
         matrixStack.pushPose();
