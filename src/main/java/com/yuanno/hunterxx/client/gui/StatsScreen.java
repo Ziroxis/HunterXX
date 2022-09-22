@@ -59,10 +59,15 @@ public class StatsScreen extends Screen {
         int posY = (this.height - 256) / 2;
         this.entityStats = EntityStatsCapability.get(player);
 
+        TexturedIconButton testButton = new TexturedIconButton(backButton, posX + 500, posY + 1700, 32, 32, new TranslationTextComponent(""), b ->
+        {
+            // empty button to not have the ugly big black box
+        });
         TexturedIconButton statsButton = new TexturedIconButton(backButton, posX + 50, posY + 170, 32, 32, new TranslationTextComponent(""), b ->
         {
             Minecraft.getInstance().setScreen(new OverViewScreen());
         });
+        this.addButton(testButton);
         this.addButton(statsButton);
 
     }

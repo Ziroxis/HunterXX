@@ -28,6 +28,8 @@ public class BasicQuest01 extends Quest {
 
     public boolean giveReward(PlayerEntity player)
     {
+        if (!this.removeQuestItem(player, Items.PORKCHOP, 5))
+            return false;
         IEntityStats entityStats = EntityStatsCapability.get(player);
         entityStats.alterExperience(300);
         ExperienceUpEvent eventExperience = new ExperienceUpEvent(player, 100);

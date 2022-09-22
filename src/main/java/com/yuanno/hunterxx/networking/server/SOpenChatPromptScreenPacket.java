@@ -4,6 +4,7 @@ import com.yuanno.hunterxx.client.gui.ChatPromptScreen;
 import com.yuanno.hunterxx.entity.questers.QuesterEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.PacketBuffer;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -45,11 +46,12 @@ public class SOpenChatPromptScreenPacket {
         @OnlyIn(Dist.CLIENT)
         public static void handle(SOpenChatPromptScreenPacket message)
         {
+            PlayerEntity player = Minecraft.getInstance().player;
             Entity questGiver = Minecraft.getInstance().level.getEntity(message.questerEntity);
             if (!(questGiver instanceof QuesterEntity))
                 return;
 
-            Minecraft.getInstance().setScreen(new ChatPromptScreen((QuesterEntity) questGiver));
+            Minecraft.getInstance().setScreen(new ChatPromptScreen(player, (QuesterEntity) questGiver));
         }
     }
 }

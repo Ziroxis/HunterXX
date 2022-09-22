@@ -66,44 +66,20 @@ public class CUpdateQuestStatePacket
 					return;
 							
 				PlayerEntity player = ctx.get().getSender();
-				// Searching if there's a nearby trainer, otherwise there's no reason for the player to accept or finish a quest
-				Optional<QuesterEntity> trainer = Beapi.getEntitiesNear(player.blockPosition(), player.level, 10, QuesterEntity.class).stream().findFirst();
-				if(!trainer.isPresent())
-					return;
-				
-				IQuestData props = QuestDataCapability.get(player);			
+				assert player != null;
+				IQuestData props = QuestDataCapability.get(player);
 				Quest quest = GameRegistry.findRegistry(Quest.class).getValue(new ResourceLocation(message.questId));
-	
-				if(quest == null || quest.isLocked(props))
-					return;
-				
-				// Checking if the trainer we've found can indeed give the player the quest we're trying to accept/finish
-				/*
-				if(!Arrays.stream(trainer.get().getAvailableQuests(player)).anyMatch((q) -> q.equals(quest)))
-					return;
 
-				 */
-				
-				boolean updateClient = false;
-								
-				// If we're trying to accept the quest make sure we don't already have it in progress, otherwise if we're trying to finish one make sure we do have it in progress and its complete
-				if(props.hasInProgressQuest(quest) && props.getInProgressQuest(quest).isComplete() && props.getInProgressQuest(quest).triggerCompleteEvent(player))
+				if (props.hasInProgressQuest(quest) && props.getInProgressQuest(quest).isComplete() && props.getInProgressQuest(quest).triggerCompleteEvent(player))
 				{
 					props.addFinishedQuest(quest);
 					props.removeInProgressQuest(quest);
-					updateClient = true;
 				}
-				else if(!props.hasInProgressQuest(quest) && quest.triggerStartEvent(player))
-				{
+				else if (!props.hasInProgressQuest(quest) && quest.triggerStartEvent(player))
 					props.addInProgressQuest(quest);
-					updateClient = true;
-				}
 
-				if(updateClient)
-				{
-					PacketHandler.sendTo(new SSyncQuestDataPacket(player.getId(), props), player);
-					PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), AbilityDataCapability.get(player)), player);
-				}
+				PacketHandler.sendTo(new SSyncQuestDataPacket(player.getId(), props), player);
+				PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), AbilityDataCapability.get(player)), player);
 			});
 		}
 		ctx.get().setPacketHandled(true);

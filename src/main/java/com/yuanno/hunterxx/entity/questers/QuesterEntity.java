@@ -116,11 +116,10 @@ public abstract class QuesterEntity extends CreatureEntity {
                         questData.addFinishedQuest(quests[i]);
                         questData.removeInProgressQuest(quests[i]);
                         PacketHandler.sendTo(new SSyncQuestDataPacket(player.getId(), questData), player);
-                        //player.sendMessage(new StringTextComponent("Quest done."), player.getUUID());
+                        PacketHandler.sendTo(new SOpenChatPromptScreenPacket(this.getId()), player);
                         return ActionResultType.PASS;
                     }
                 }
-                //player.sendMessage(new StringTextComponent("Quest going."), player.getUUID());
             }
             PacketHandler.sendTo(new SOpenChatPromptScreenPacket(this.getId()), player);
             return ActionResultType.PASS;

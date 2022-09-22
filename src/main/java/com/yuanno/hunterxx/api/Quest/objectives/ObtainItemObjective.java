@@ -5,6 +5,7 @@ import com.yuanno.hunterxx.data.quest.objectives.IObtainItemObjective;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+import java.util.ArrayList;
 import java.util.function.Predicate;
 
 public class ObtainItemObjective extends Objective implements IObtainItemObjective
@@ -30,4 +31,9 @@ public class ObtainItemObjective extends Objective implements IObtainItemObjecti
     {
         return this.check.test(stack);
     }
-}
+
+    @Override
+    public int checkItems(ArrayList<ItemStack> stacks)
+    {
+        return stacks.stream().filter(this::checkItem).mapToInt(stack -> stack.getCount()).sum();
+    }}
