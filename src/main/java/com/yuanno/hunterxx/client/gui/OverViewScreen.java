@@ -3,6 +3,8 @@ package com.yuanno.hunterxx.client.gui;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.yuanno.hunterxx.Main;
 import com.yuanno.hunterxx.api.TexturedIconButton;
+import com.yuanno.hunterxx.data.entity.EntityStatsCapability;
+import com.yuanno.hunterxx.data.entity.IEntityStats;
 import com.yuanno.hunterxx.networking.PacketHandler;
 import com.yuanno.hunterxx.networking.client.CRequestSyncWorldDataPacket;
 import net.minecraft.client.Minecraft;
@@ -10,6 +12,7 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.StringTextComponent;
+import net.minecraft.util.text.TextFormatting;
 import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
@@ -26,7 +29,7 @@ public class OverViewScreen extends Screen {
 
     private int guiLeft;
     private int guiTop;
-
+    private IEntityStats stats;
 
 
     private final PlayerEntity player;
@@ -35,6 +38,8 @@ public class OverViewScreen extends Screen {
     {
         super(new StringTextComponent(""));
         this.player = Minecraft.getInstance().player;
+        assert player != null;
+        this.stats = EntityStatsCapability.get(player);
     }
 
     @Override
@@ -48,6 +53,10 @@ public class OverViewScreen extends Screen {
         int posX = (this.width - 256) / 2;
         int posY = (this.height - 256) / 2;
 
+        TexturedIconButton test = new TexturedIconButton(basicButton, posX + 600, posY + 500, 64, 16, new TranslationTextComponent(""), b ->
+        {
+            Minecraft.getInstance().setScreen(new StatsScreen(this.player));
+        });
         TexturedIconButton statsButton = new TexturedIconButton(basicButton, posX + 60, posY + 50, 64, 16, new TranslationTextComponent("gui.hunterxx.stats"), b ->
         {
            Minecraft.getInstance().setScreen(new StatsScreen(this.player));
@@ -69,6 +78,7 @@ public class OverViewScreen extends Screen {
         });
         abilitiesButton = abilitiesButton.setTextInfo(posX + 70, posY + 108, 0.95);
 
+        this.addButton(test);
         this.addButton(abilitiesButton);
         this.addButton(achievementsButton);
         this.addButton(questButton);
@@ -93,6 +103,8 @@ public class OverViewScreen extends Screen {
 
         minecraft.getTextureManager().bind(overviewScreen);
         GuiUtils.drawTexturedModalRect((int) ((scaledWidth / 2) - 128), 0, 0, 0, 256, 256, 0);
+        drawString(matrixStack, font, TextFormatting.BOLD + "Jenny: " + TextFormatting.RESET +  stats.getJenny(), guiLeft + 90 , guiTop + 100, 16777215);
+
     }
 
     @Override

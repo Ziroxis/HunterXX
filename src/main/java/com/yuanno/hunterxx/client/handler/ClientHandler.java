@@ -1,7 +1,6 @@
 package com.yuanno.hunterxx.client.handler;
 
-import com.yuanno.hunterxx.client.renderer.BasicQuestEntity1Renderer;
-import com.yuanno.hunterxx.entity.questers.basic.EntityBasicQuest1;
+import com.yuanno.hunterxx.client.renderer.*;
 import com.yuanno.hunterxx.init.ModEntities;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
@@ -22,7 +21,19 @@ public class ClientHandler {
 
     public static void onSetup()
     {
-        RenderingRegistry.registerEntityRenderingHandler(ModEntities.BASICQUESTENTITY1.get(), new BasicQuestEntity1Renderer.Factory());
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.BASICQUESTENTITY1.get(), new BasicQuestCollectingEntity1Renderer.Factory());
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.BASICQUESTENTITY2.get(), new BasicQuestCollectingEntity2Renderer.Factory());
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.BASICQUESTENTITY3.get(), new BasicQuestCollectingEntity3Renderer.Factory());
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.BASICQUESTENTITY4.get(), new BasicQuestCollectingEntity4Renderer.Factory());
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.BASICQUESTENTITY5.get(), new BasicQuestCollectingEntity5Renderer.Factory());
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.BASICQUESTENTITY6.get(), new BasicQuestCollectingEntity6Renderer.Factory());
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.BASICQUESTENTITY7.get(), new BasicQuestCollectingEntity7Renderer.Factory());
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.BASICQUESTENTITY8.get(), new BasicQuestCollectingEntity8Renderer.Factory());
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.BASICQUESTENTITY9.get(), new BasicQuestCollectingEntity9Renderer.Factory());
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.BASICQUESTENTITY10.get(), new BasicQuestCollectingEntity10Renderer.Factory());
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.BASICQUESTENTITY11.get(), new BasicQuestCollectingEntity11Renderer.Factory());
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.BASICQUESTENTITY12.get(), new BasicQuestCollectingEntity12Renderer.Factory());
+
         Map<String, PlayerRenderer> playerSkinMap = Minecraft.getInstance().getEntityRenderDispatcher().getSkinMap();
         ClientHandler.addPlayerLayers(playerSkinMap.get("default"));
         ClientHandler.addPlayerLayers(playerSkinMap.get("slim"));

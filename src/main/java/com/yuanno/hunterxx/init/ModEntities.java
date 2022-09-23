@@ -1,7 +1,7 @@
 package com.yuanno.hunterxx.init;
 
 import com.yuanno.hunterxx.Main;
-import com.yuanno.hunterxx.entity.questers.basic.EntityBasicQuest1;
+import com.yuanno.hunterxx.entity.questers.basic.collecting.*;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
@@ -12,11 +12,77 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class ModEntities {
     public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITIES, Main.MODID);
 
-    public static final RegistryObject<EntityType<EntityBasicQuest1>> BASICQUESTENTITY1 = ENTITIES
+    public static final RegistryObject<EntityType<EntityBasicCollectingQuest1>> BASICQUESTENTITY1 = ENTITIES
             .register("basicquestentity1",
-                    () -> EntityType.Builder.of(EntityBasicQuest1::new, EntityClassification.CREATURE)
+                    () -> EntityType.Builder.of(EntityBasicCollectingQuest1::new, EntityClassification.CREATURE)
                             .sized(1f, 2f)
                             .setTrackingRange(5)
                             .build(new ResourceLocation(Main.MODID, "basicquestentity1").toString()));
+    public static final RegistryObject<EntityType<EntityBasicCollectingQuest2>> BASICQUESTENTITY2 = ENTITIES
+            .register("basicquestentity2",
+                    () -> EntityType.Builder.of(EntityBasicCollectingQuest2::new, EntityClassification.CREATURE)
+                            .sized(1f, 2f)
+                            .setTrackingRange(5)
+                            .build(new ResourceLocation(Main.MODID, "basicquestentity2").toString()));
+    public static final RegistryObject<EntityType<EntityBasicCollectingQuest3>> BASICQUESTENTITY3 = ENTITIES
+            .register("basicquestentity3",
+                    () -> EntityType.Builder.of(EntityBasicCollectingQuest3::new, EntityClassification.CREATURE)
+                            .sized(1f, 2f)
+                            .setTrackingRange(5)
+                            .build(new ResourceLocation(Main.MODID, "basicquestentity3").toString()));
+    public static final RegistryObject<EntityType<EntityBasicCollectingQuest4>> BASICQUESTENTITY4 = ENTITIES
+            .register("basicquestentity4",
+                    () -> EntityType.Builder.of(EntityBasicCollectingQuest4::new, EntityClassification.CREATURE)
+                            .sized(1f, 2f)
+                            .setTrackingRange(5)
+                            .build(new ResourceLocation(Main.MODID, "basicquestentity4").toString()));
+    public static final RegistryObject<EntityType<EntityBasicCollectingQuest5>> BASICQUESTENTITY5 = ENTITIES
+            .register("basicquestentity5",
+                    () -> EntityType.Builder.of(EntityBasicCollectingQuest5::new, EntityClassification.CREATURE)
+                            .sized(1f, 2f)
+                            .setTrackingRange(5)
+                            .build(new ResourceLocation(Main.MODID, "basicquestentity5").toString()));
+    public static final RegistryObject<EntityType<EntityBasicCollectingQuest6>> BASICQUESTENTITY6 = ENTITIES
+            .register("basicquestentity6",
+                    () -> EntityType.Builder.of(EntityBasicCollectingQuest6::new, EntityClassification.CREATURE)
+                            .sized(1f, 2f)
+                            .setTrackingRange(5)
+                            .build(new ResourceLocation(Main.MODID, "basicquestentity6").toString()));
+    public static final RegistryObject<EntityType<EntityBasicCollectingQuest7>> BASICQUESTENTITY7 = ENTITIES
+            .register("basicquestentity7",
+                    () -> EntityType.Builder.of(EntityBasicCollectingQuest7::new, EntityClassification.CREATURE)
+                            .sized(1f, 2f)
+                            .setTrackingRange(5)
+                            .build(new ResourceLocation(Main.MODID, "basicquestentity7").toString()));
+    public static final RegistryObject<EntityType<EntityBasicCollectingQuest8>> BASICQUESTENTITY8 = ENTITIES
+            .register("basicquestentity8",
+                    () -> EntityType.Builder.of(EntityBasicCollectingQuest8::new, EntityClassification.CREATURE)
+                            .sized(1f, 2f)
+                            .setTrackingRange(5)
+                            .build(new ResourceLocation(Main.MODID, "basicquestentity8").toString()));
+    public static final RegistryObject<EntityType<EntityBasicCollectingQuest9>> BASICQUESTENTITY9 = ENTITIES
+            .register("basicquestentity9",
+                    () -> EntityType.Builder.of(EntityBasicCollectingQuest9::new, EntityClassification.CREATURE)
+                            .sized(1f, 2f)
+                            .setTrackingRange(5)
+                            .build(new ResourceLocation(Main.MODID, "basicquestentity9").toString()));
+    public static final RegistryObject<EntityType<EntityBasicCollectingQuest10>> BASICQUESTENTITY10 = ENTITIES
+            .register("basicquestentity10",
+                    () -> EntityType.Builder.of(EntityBasicCollectingQuest10::new, EntityClassification.CREATURE)
+                            .sized(1f, 2f)
+                            .setTrackingRange(5)
+                            .build(new ResourceLocation(Main.MODID, "basicquestentity10").toString()));
+    public static final RegistryObject<EntityType<EntityBasicCollectingQuest11>> BASICQUESTENTITY11 = ENTITIES
+            .register("basicquestentity11",
+                    () -> EntityType.Builder.of(EntityBasicCollectingQuest11::new, EntityClassification.CREATURE)
+                            .sized(1f, 2f)
+                            .setTrackingRange(5)
+                            .build(new ResourceLocation(Main.MODID, "basicquestentity11").toString()));
+    public static final RegistryObject<EntityType<EntityBasicCollectingQuest12>> BASICQUESTENTITY12 = ENTITIES
+            .register("basicquestentity12",
+                    () -> EntityType.Builder.of(EntityBasicCollectingQuest12::new, EntityClassification.CREATURE)
+                            .sized(1f, 2f)
+                            .setTrackingRange(5)
+                            .build(new ResourceLocation(Main.MODID, "basicquestentity12").toString()));
 
 }

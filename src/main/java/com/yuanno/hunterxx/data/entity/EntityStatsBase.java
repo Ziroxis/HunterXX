@@ -16,6 +16,7 @@ public class EntityStatsBase implements IEntityStats {
     private int maxAura;
     private int auraRegeneration;
     private String category = "";
+    private int jenny;
 
 
     @Override
@@ -216,5 +217,20 @@ public class EntityStatsBase implements IEntityStats {
     @Override
     public void setCategory(String value) {
         this.category = value;
+    }
+
+    @Override
+    public int getJenny() {
+        return this.jenny;
+    }
+
+    @Override
+    public void alterJenny(int value) {
+        this.jenny = this.jenny + value;
+    }
+
+    @Override
+    public void setJenny(int value) {
+        this.jenny = value;
     }
 }

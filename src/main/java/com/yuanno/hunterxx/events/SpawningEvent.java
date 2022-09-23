@@ -50,6 +50,9 @@ public class SpawningEvent {
             stats.setDefense(0);
             stats.setStrength(0);
             System.out.println(stats.getCategory());
+
+            // JENNY
+            stats.setJenny(0);
         }
         PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), stats), player);
         PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), abilityData), player);

@@ -43,6 +43,8 @@ public class EntityStatsCapability {
                 props.putInt("auraRegeneration", instance.getAuraRegeneration());
                 props.putString("category", instance.getCategory());
 
+                //jenny
+                props.putInt("jenny", instance.getJenny());
 
                 return props;
             }
@@ -74,6 +76,8 @@ public class EntityStatsCapability {
                 instance.setAuraRegeneration(props.getInt("auraRegeneration"));
                 instance.setCategory(props.getString("category"));
 
+                //jenny
+                instance.setJenny(props.getInt("jenny"));
             }
         }, () -> new EntityStatsBase());
 

@@ -59,4 +59,9 @@ public interface IEntityStats {
     String getCategory();
     void setCategory(String value);
 
+    // JENNY
+    int getJenny();
+    void alterJenny(int value);
+    void setJenny(int value);
+
 }
