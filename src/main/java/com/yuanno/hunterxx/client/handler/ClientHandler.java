@@ -34,6 +34,14 @@ public class ClientHandler {
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.BASICQUESTENTITY11.get(), new BasicQuestCollectingEntity11Renderer.Factory());
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.BASICQUESTENTITY12.get(), new BasicQuestCollectingEntity12Renderer.Factory());
 
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.BASICKILLINGENTITY1.get(), new BasicQuestKillingEntity1Renderer.Factory());
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.BASICKILLINGENTITY2.get(), new BasicQuestKillingEntity2Renderer.Factory());
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.BASICKILLINGENTITY3.get(), new BasicQuestKillingEntity3Renderer.Factory());
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.BASICKILLINGENTITY4.get(), new BasicQuestKillingEntity4Renderer.Factory());
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.BASICKILLINGENTITY5.get(), new BasicQuestKillingEntity5Renderer.Factory());
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.BASICKILLINGENTITY6.get(), new BasicQuestKillingEntity6Renderer.Factory());
+
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.FOXBEAR.get(), new FoxBearRenderer.Factory());
         Map<String, PlayerRenderer> playerSkinMap = Minecraft.getInstance().getEntityRenderDispatcher().getSkinMap();
         ClientHandler.addPlayerLayers(playerSkinMap.get("default"));
         ClientHandler.addPlayerLayers(playerSkinMap.get("slim"));

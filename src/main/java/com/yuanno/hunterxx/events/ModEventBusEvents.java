@@ -1,5 +1,6 @@
 package com.yuanno.hunterxx.events;
 
+import com.yuanno.hunterxx.entity.hostile.FoxBearEntity;
 import com.yuanno.hunterxx.entity.questers.QuesterEntity;
 import com.yuanno.hunterxx.init.ModEntities;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
@@ -25,5 +26,14 @@ public class ModEventBusEvents {
         event.put(ModEntities.BASICQUESTENTITY11.get(), QuesterEntity.setCustomAttributes().build());
         event.put(ModEntities.BASICQUESTENTITY12.get(), QuesterEntity.setCustomAttributes().build());
 
+        event.put(ModEntities.BASICKILLINGENTITY1.get(), QuesterEntity.setCustomAttributes().build());
+        event.put(ModEntities.BASICKILLINGENTITY2.get(), QuesterEntity.setCustomAttributes().build());
+        event.put(ModEntities.BASICKILLINGENTITY3.get(), QuesterEntity.setCustomAttributes().build());
+        event.put(ModEntities.BASICKILLINGENTITY4.get(), QuesterEntity.setCustomAttributes().build());
+        event.put(ModEntities.BASICKILLINGENTITY5.get(), QuesterEntity.setCustomAttributes().build());
+        event.put(ModEntities.BASICKILLINGENTITY6.get(), QuesterEntity.setCustomAttributes().build());
+
+
+        event.put(ModEntities.FOXBEAR.get(), FoxBearEntity.setCustomAttributes().build());
     }
 }

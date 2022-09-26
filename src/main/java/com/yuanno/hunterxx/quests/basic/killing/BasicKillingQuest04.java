@@ -20,7 +20,7 @@ public class BasicKillingQuest04 extends Quest {
         return target.getType() == EntityType.WITCH;
     };
 
-    private Objective killObjective = new KillEntityObjective("Kill 3 skeletons", 3, TARGET_CHECK);
+    private Objective killObjective = new KillEntityObjective("Kill 3 witches", 3, TARGET_CHECK);
 
     public BasicKillingQuest04()
     {

@@ -1,5 +1,6 @@
 package com.yuanno.hunterxx;
 
+import com.yuanno.hunterxx.client.gui.NenBarOverlay;
 import com.yuanno.hunterxx.client.handler.ClientHandler;
 import com.yuanno.hunterxx.data.AttachingCapability;
 import com.yuanno.hunterxx.init.*;
@@ -32,7 +33,7 @@ public class Main
         ModQuests.QUESTS.register(modEventBus);
         ModEntities.ENTITIES.register(modEventBus);
         ModAbilities.register(modEventBus);
-
+        ModItems.ITEMS.register(modEventBus);
 
 
 
@@ -54,6 +55,7 @@ public class Main
     {
         ClientHandler.onSetup();
         ModKeyBinds.init();
+        MinecraftForge.EVENT_BUS.register(new NenBarOverlay());
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)

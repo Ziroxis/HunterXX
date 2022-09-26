@@ -30,6 +30,10 @@ public class ModEntityGeneration {
             event.getSpawns().addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(ModEntities.BASICQUESTENTITY10.get(), 1, 1, 1));
             event.getSpawns().addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(ModEntities.BASICQUESTENTITY11.get(), 1, 1, 1));
             event.getSpawns().addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(ModEntities.BASICQUESTENTITY12.get(), 1, 1, 1));
+            if (types.contains(BiomeDictionary.Type.FOREST))
+            {
+                event.getSpawns().addSpawn(EntityClassification.CREATURE, new MobSpawnInfo.Spawners(ModEntities.FOXBEAR.get(), 2, 4, 5));
+            }
         }
     }
 }
