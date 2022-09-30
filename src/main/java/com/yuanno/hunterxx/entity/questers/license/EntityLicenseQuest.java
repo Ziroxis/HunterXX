@@ -15,6 +15,6 @@ public class EntityLicenseQuest extends QuesterEntity {
         this.acceptanceSpeech = "Do what I asked and you'll get your hunter license";
         this.decliningSpeech = "The hunter lifestyle ain't made for everyone, can't blame you";
         this.ongoingSpeech = "I see potential in you as a hunter, hopefully you won't disappoint me.";
-        this.doneSpeech = "Great job, here is your hunter license.";
+        this.doneSpeech = "Great job, here is your hunter license. Right click it to make it truly yours.";
     }
 }

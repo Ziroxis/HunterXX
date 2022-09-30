@@ -7,16 +7,17 @@ import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 
-public class ObtainItemObjective extends Objective implements IObtainItemObjective
+public class ObtainItemObjective<T extends Item> extends Objective implements IObtainItemObjective
 {
     private Predicate<ItemStack> check = (itemStack) -> false;
 
-    public ObtainItemObjective(String title, int count, Item itemTarget)
+    public ObtainItemObjective(String title, int count, Supplier<T> itemTarget)
     {
         super(title);
         this.setMaxProgress(count);
-        this.check = (itemStack) -> itemStack.getItem() == itemTarget;
+        this.check = (itemStack) -> itemStack.getItem() == itemTarget.get();
     }
 
     public ObtainItemObjective(String title, int count, Predicate<ItemStack> check)

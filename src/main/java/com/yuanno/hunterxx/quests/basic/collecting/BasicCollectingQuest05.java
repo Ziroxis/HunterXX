@@ -15,7 +15,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 public class BasicCollectingQuest05 extends Quest {
 
-    private Objective objective = new ObtainItemObjective("Get a diamond", 3, Items.DIAMOND);
+    private Objective objective = new ObtainItemObjective("Get a diamond", 3, Items.DIAMOND.delegate);
 
     public BasicCollectingQuest05()
     {

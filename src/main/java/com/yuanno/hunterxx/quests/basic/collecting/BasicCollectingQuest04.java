@@ -14,8 +14,8 @@ import net.minecraft.item.Items;
 import net.minecraftforge.common.MinecraftForge;
 
 public class BasicCollectingQuest04 extends Quest {
-    private Objective objective = new ObtainItemObjective("Get a bow", 1, Items.BOW);
-    private Objective objectiveArrow = new ObtainItemObjective("Get arrows", 16, Items.ARROW);
+    private Objective objective = new ObtainItemObjective("Get a bow", 1, Items.BOW.delegate);
+    private Objective objectiveArrow = new ObtainItemObjective("Get arrows", 16, Items.ARROW.delegate);
 
     public BasicCollectingQuest04()
     {

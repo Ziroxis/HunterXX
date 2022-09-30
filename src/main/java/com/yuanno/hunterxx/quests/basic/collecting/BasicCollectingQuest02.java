@@ -15,7 +15,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 public class BasicCollectingQuest02 extends Quest {
 
-    private Objective objective = new ObtainItemObjective("Get some wheat", 30, Items.WHEAT);
+    private Objective objective = new ObtainItemObjective("Get some wheat", 30, Items.WHEAT.delegate);
 
     public BasicCollectingQuest02()
     {

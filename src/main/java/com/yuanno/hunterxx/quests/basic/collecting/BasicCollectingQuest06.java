@@ -15,7 +15,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 public class BasicCollectingQuest06 extends Quest {
 
-    private Objective objective = new ObtainItemObjective("Get some phantom membrane", 10, Items.PHANTOM_MEMBRANE);
+    private Objective objective = new ObtainItemObjective("Get some phantom membrane", 10, Items.PHANTOM_MEMBRANE.delegate);
 
     public BasicCollectingQuest06()
     {

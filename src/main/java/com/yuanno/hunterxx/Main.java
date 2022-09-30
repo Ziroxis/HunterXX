@@ -33,7 +33,7 @@ public class Main
         ModEntities.ENTITIES.register(modEventBus);
         ModAbilities.register(modEventBus);
         ModQuests.QUESTS.register(modEventBus);
-
+        ModBlocks.BLOCKS.register(modEventBus);
 
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);

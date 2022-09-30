@@ -15,7 +15,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 public class BasicCollectingQuest07 extends Quest {
 
-    private Objective objective = new ObtainItemObjective("Get a heart item", 1, Items.HEART_OF_THE_SEA);
+    private Objective objective = new ObtainItemObjective("Get a heart item", 1, Items.HEART_OF_THE_SEA.delegate);
 
     public BasicCollectingQuest07()
     {

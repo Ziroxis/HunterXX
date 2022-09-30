@@ -15,7 +15,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 public class BasicCollectingQuest11 extends Quest {
 
-    private Objective objective = new ObtainItemObjective("Get the star", 1, Items.NETHER_STAR);
+    private Objective objective = new ObtainItemObjective("Get the star", 1, Items.NETHER_STAR.delegate);
 
     public BasicCollectingQuest11()
     {

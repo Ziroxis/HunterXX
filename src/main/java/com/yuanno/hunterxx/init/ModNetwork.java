@@ -40,6 +40,7 @@ public class ModNetwork {
         PacketHandler.registerPacket(SUpdateEquippedAbilityPacket.class, SUpdateEquippedAbilityPacket::encode, SUpdateEquippedAbilityPacket::decode, SUpdateEquippedAbilityPacket::handle);
         PacketHandler.registerPacket(SSyncWorldDataPacket.class, SSyncWorldDataPacket::encode, SSyncWorldDataPacket::decode, SSyncWorldDataPacket::handle);
         PacketHandler.registerPacket(SOpenChatPromptScreenPacket.class, SOpenChatPromptScreenPacket::encode, SOpenChatPromptScreenPacket::decode, SOpenChatPromptScreenPacket::handle);
+        PacketHandler.registerPacket(SOpenComputerScreenPacket.class, SOpenComputerScreenPacket::encode, SOpenComputerScreenPacket::decode, SOpenComputerScreenPacket::handle);
 
 
         PacketHandler.registerPacket(AuraSync.class, AuraSync::encode, AuraSync::decode, AuraSync::handle);

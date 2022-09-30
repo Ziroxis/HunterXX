@@ -15,7 +15,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 public class BasicCollectingQuest08 extends Quest {
 
-    private Objective objective = new ObtainItemObjective("Get a legendary apple", 1, Items.ENCHANTED_GOLDEN_APPLE);
+    private Objective objective = new ObtainItemObjective("Get a legendary apple", 1, Items.ENCHANTED_GOLDEN_APPLE.delegate);
 
     public BasicCollectingQuest08()
     {

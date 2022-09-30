@@ -95,20 +95,21 @@ public class QuestScreen extends Screen {
                 Quest questInProgress = questProps.getInProgressQuests()[i];
                 String questInProgressString = questInProgress.getTitle();
                 String questInProgressDescription = questInProgress.getDescription();
-                drawString(matrixStack, font, "Quest: ", guiLeft - 40 , guiTop - 80 + (i * 40), 16777215);
-                drawString(matrixStack, font, questInProgressString, guiLeft - 5, guiTop - 80 + (i * 40), 16777215);
-                drawString(matrixStack, font, "Rank: " + questInProgress.getRank(), guiLeft - 40, guiTop - 60 + (i * 40), 16777215);
+                drawString(matrixStack, font, "Quest: ", guiLeft - 40 , guiTop - 80 + (i * 50), 16777215);
+                drawString(matrixStack, font, questInProgressString, guiLeft - 5, guiTop - 80 + (i * 50), 16777215);
+                List<Objective> objectives = questInProgress.getObjectives();
+                drawString(matrixStack, font, "Rank: " + questInProgress.getRank(), guiLeft - 40, guiTop - 60 + (i * 50) + (objectives.size() * 8), 16777215);
                 if (quests[i].isComplete())
                 {
-                    drawString(matrixStack, font, TextFormatting.BOLD + "DONE", guiLeft - 40 , guiTop - 50 + (i * 40), 16777215);
+                    drawString(matrixStack, font, TextFormatting.BOLD + "DONE", guiLeft - 40 , guiTop - 50 + (i * 50) + (objectives.size() * 8), 16777215);
 
                 }
-                List<Objective> objectives = questInProgress.getObjectives();
                 for (int a = 0; a < objectives.size(); a++)
                 {
                     Objective objective = objectives.get(a);
                     String objectiveString = objective.getTitle();
-                    drawString(matrixStack, font, "Goal: " + objectiveString, guiLeft - 40, guiTop - 70 + (i * 40) + (a * 5), 16777215);
+                    drawString(matrixStack, font, "Goal: " + objectiveString, guiLeft - 40, guiTop - 70 + (i * 50) + (a * 8), 16777215);
+
                 }
             }
         }

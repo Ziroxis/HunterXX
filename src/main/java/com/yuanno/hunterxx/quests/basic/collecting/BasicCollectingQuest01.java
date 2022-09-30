@@ -14,7 +14,7 @@ import net.minecraft.item.Items;
 import net.minecraftforge.common.MinecraftForge;
 
 public class BasicCollectingQuest01 extends Quest {
-    private Objective objective = new ObtainItemObjective("Get some pork chops", 5, Items.PORKCHOP);
+    private Objective objective = new ObtainItemObjective("Get some pork chops", 5, Items.PORKCHOP.delegate);
 
     public BasicCollectingQuest01()
     {

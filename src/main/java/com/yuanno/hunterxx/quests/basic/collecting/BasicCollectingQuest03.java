@@ -15,7 +15,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 public class BasicCollectingQuest03 extends Quest {
 
-    private Objective objective = new ObtainItemObjective("Get a sword", 1, Items.IRON_SWORD);
+    private Objective objective = new ObtainItemObjective("Get a sword", 1, Items.IRON_SWORD.delegate);
 
     public BasicCollectingQuest03()
     {

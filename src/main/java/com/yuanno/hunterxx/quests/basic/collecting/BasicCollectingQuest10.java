@@ -15,7 +15,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 public class BasicCollectingQuest10 extends Quest {
 
-    private Objective objective = new ObtainItemObjective("Get the egg", 1, Items.DRAGON_EGG);
+    private Objective objective = new ObtainItemObjective("Get the egg", 1, Items.DRAGON_EGG.delegate);
 
     public BasicCollectingQuest10()
     {

@@ -15,7 +15,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 public class BasicCollectingQuest12 extends Quest {
 
-    private Objective objective = new ObtainItemObjective("Get a teleporting item", 10, Items.ENDER_PEARL);
+    private Objective objective = new ObtainItemObjective("Get a teleporting item", 10, Items.ENDER_PEARL.delegate);
 
     public BasicCollectingQuest12()
     {

@@ -15,7 +15,7 @@ import net.minecraftforge.common.MinecraftForge;
 
 public class BasicCollectingQuest09 extends Quest {
 
-    private Objective objective = new ObtainItemObjective("Get legendary wings", 1, Items.ELYTRA);
+    private Objective objective = new ObtainItemObjective("Get legendary wings", 1, Items.ELYTRA.delegate);
 
     public BasicCollectingQuest09()
     {
