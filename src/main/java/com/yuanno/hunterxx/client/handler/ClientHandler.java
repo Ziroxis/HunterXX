@@ -1,5 +1,6 @@
 package com.yuanno.hunterxx.client.handler;
 
+import com.yuanno.hunterxx.client.overlay.renderer.TenModelRenderer;
 import com.yuanno.hunterxx.client.renderer.*;
 import com.yuanno.hunterxx.init.ModEntities;
 import net.minecraft.client.Minecraft;
@@ -41,6 +42,8 @@ public class ClientHandler {
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.BASICKILLINGENTITY5.get(), new BasicQuestKillingEntity5Renderer.Factory());
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.BASICKILLINGENTITY6.get(), new BasicQuestKillingEntity6Renderer.Factory());
 
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.ENTITYLICENSEQUEST.get(), new EntityLicenseQuestRenderer.Factory());
+
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.FOXBEAR.get(), new FoxBearRenderer.Factory());
         Map<String, PlayerRenderer> playerSkinMap = Minecraft.getInstance().getEntityRenderDispatcher().getSkinMap();
         ClientHandler.addPlayerLayers(playerSkinMap.get("default"));
@@ -54,7 +57,7 @@ public class ClientHandler {
         List<LayerRenderer<AbstractClientPlayerEntity, PlayerModel<AbstractClientPlayerEntity>>> layers = ObfuscationReflectionHelper.getPrivateValue(LivingRenderer.class, renderer, "field_177097_h");
         if(layers != null)
         {
-
+            layers.add(new TenModelRenderer<>(renderer));
         }
     }
 }

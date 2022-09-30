@@ -4,6 +4,7 @@ import com.yuanno.hunterxx.Main;
 import com.yuanno.hunterxx.entity.hostile.FoxBearEntity;
 import com.yuanno.hunterxx.entity.questers.basic.collecting.*;
 import com.yuanno.hunterxx.entity.questers.basic.killing.*;
+import com.yuanno.hunterxx.entity.questers.license.EntityLicenseQuest;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
@@ -124,6 +125,12 @@ public class ModEntities {
                             .sized(1f, 2f)
                             .setTrackingRange(5)
                             .build(new ResourceLocation(Main.MODID, "basickillingquestentity6").toString()));
+    public static final RegistryObject<EntityType<EntityLicenseQuest>> ENTITYLICENSEQUEST = ENTITIES
+            .register("entitylicensequest",
+                    () -> EntityType.Builder.of(EntityLicenseQuest::new, EntityClassification.CREATURE)
+                            .sized(1f, 2f)
+                            .setTrackingRange(5)
+                            .build(new ResourceLocation(Main.MODID, "entitylicensequest").toString()));
 
     public static final RegistryObject<EntityType<FoxBearEntity>> FOXBEAR = ENTITIES
             .register("foxbear",

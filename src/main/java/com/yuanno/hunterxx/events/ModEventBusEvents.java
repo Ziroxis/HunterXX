@@ -33,6 +33,7 @@ public class ModEventBusEvents {
         event.put(ModEntities.BASICKILLINGENTITY5.get(), QuesterEntity.setCustomAttributes().build());
         event.put(ModEntities.BASICKILLINGENTITY6.get(), QuesterEntity.setCustomAttributes().build());
 
+        event.put(ModEntities.ENTITYLICENSEQUEST.get(), QuesterEntity.setCustomAttributes().build());
 
         event.put(ModEntities.FOXBEAR.get(), FoxBearEntity.setCustomAttributes().build());
     }

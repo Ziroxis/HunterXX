@@ -7,6 +7,7 @@ import com.yuanno.hunterxx.api.Quest.Quest;
 import com.yuanno.hunterxx.api.Quest.QuestRegistry;
 import com.yuanno.hunterxx.quests.basic.collecting.*;
 import com.yuanno.hunterxx.quests.basic.killing.*;
+import com.yuanno.hunterxx.quests.nen.HunterLicenseQuest;
 import net.minecraftforge.registries.DeferredRegister;
 
 import java.util.HashMap;
@@ -46,6 +47,8 @@ public class ModQuests {
 
     public static final Quest[] BASICKILLINGQUEST = new Quest[] {BASICKILLINGQUEST1, BASICKILLINGQUEST2, BASICKILLINGQUEST3, BASICKILLINGQUEST4, BASICKILLINGQUEST5, BASICKILLINGQUEST6};
 
+    public static final Quest HUNTER_LICENSE = new HunterLicenseQuest();
+    public static final Quest[] HUNTER_LICENSE_QUESTS = new Quest[] {HUNTER_LICENSE};
     static
     {
         for (Quest quest : BASICCOLLECTINGQUEST)
@@ -63,6 +66,19 @@ public class ModQuests {
         }
 
         for (Quest quest : BASICKILLINGQUEST)
+        {
+            String resourceName = Beapi.getResourceName(quest.getId());
+            langMap.put("quest." + Main.MODID + "." + resourceName, quest.getTitle());
+
+            for(Objective obj : quest.getObjectives())
+            {
+                langMap.put("quest.objective." + Main.MODID + "." + obj.getId(), obj.getTitle());
+            }
+
+            QUESTS.register(resourceName, () -> quest);
+
+        }
+        for (Quest quest : HUNTER_LICENSE_QUESTS)
         {
             String resourceName = Beapi.getResourceName(quest.getId());
             langMap.put("quest." + Main.MODID + "." + resourceName, quest.getTitle());
