@@ -4,6 +4,7 @@ import com.mojang.blaze3d.matrix.MatrixStack;
 import com.yuanno.hunterxx.Main;
 import com.yuanno.hunterxx.api.Quest.Objective;
 import com.yuanno.hunterxx.api.Quest.Quest;
+import com.yuanno.hunterxx.api.Quest.objectives.StandStillObjective;
 import com.yuanno.hunterxx.api.TexturedIconButton;
 import com.yuanno.hunterxx.data.entity.EntityStatsCapability;
 import com.yuanno.hunterxx.data.entity.IEntityStats;
@@ -11,6 +12,7 @@ import com.yuanno.hunterxx.data.quest.IQuestData;
 import com.yuanno.hunterxx.data.quest.QuestDataCapability;
 import com.yuanno.hunterxx.networking.PacketHandler;
 import com.yuanno.hunterxx.networking.client.CRequestSyncWorldDataPacket;
+import net.minecraft.block.StandingSignBlock;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.entity.player.PlayerEntity;
@@ -108,6 +110,10 @@ public class QuestScreen extends Screen {
                 {
                     Objective objective = objectives.get(a);
                     String objectiveString = objective.getTitle();
+                    if (objective instanceof StandStillObjective)
+                    {
+                        //drawString(matrixStack, font, "Progress: " + objective.getProgress(), guiLeft - 120, guiTop - 70 + (i * 50) + (a * 8), 16777215);
+                    }
                     drawString(matrixStack, font, "Goal: " + objectiveString, guiLeft - 40, guiTop - 70 + (i * 50) + (a * 8), 16777215);
 
                 }

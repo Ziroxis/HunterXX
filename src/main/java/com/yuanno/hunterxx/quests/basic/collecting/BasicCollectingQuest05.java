@@ -32,9 +32,9 @@ public class BasicCollectingQuest05 extends Quest {
         if (!this.removeQuestItem(player, Items.DIAMOND, 3))
             return false;
         IEntityStats entityStats = EntityStatsCapability.get(player);
-        entityStats.alterExperience(500);
+        entityStats.alterExperience(300);
         entityStats.alterJenny(150);
-        ExperienceUpEvent eventExperience = new ExperienceUpEvent(player, 500);
+        ExperienceUpEvent eventExperience = new ExperienceUpEvent(player, 300);
         MinecraftForge.EVENT_BUS.post(eventExperience);
 
         PacketHandler.sendToServer(new CSyncentityStatsPacket(entityStats));

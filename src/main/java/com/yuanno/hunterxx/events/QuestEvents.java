@@ -142,6 +142,7 @@ public class QuestEvents
                     if (((ISurviveObjective) obj).checkTime(player))
                     {
                         obj.alterProgress(1);
+                        System.out.println(obj.getProgress());
                         PacketHandler.sendTo(new SSyncQuestDataPacket(player.getId(), questProps), player);
                     }
                 }

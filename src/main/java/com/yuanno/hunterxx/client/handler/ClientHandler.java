@@ -2,6 +2,7 @@ package com.yuanno.hunterxx.client.handler;
 
 import com.yuanno.hunterxx.client.overlay.renderer.TenModelRenderer;
 import com.yuanno.hunterxx.client.renderer.*;
+import com.yuanno.hunterxx.entity.questers.nen.EntityNenTeacher;
 import com.yuanno.hunterxx.init.ModEntities;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.player.AbstractClientPlayerEntity;
@@ -43,6 +44,7 @@ public class ClientHandler {
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.BASICKILLINGENTITY6.get(), new BasicQuestKillingEntity6Renderer.Factory());
 
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.ENTITYLICENSEQUEST.get(), new EntityLicenseQuestRenderer.Factory());
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.ENTITYNENTEACHER.get(), new UnlockingNenEntityRenderer.Factory());
 
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.FOXBEAR.get(), new FoxBearRenderer.Factory());
         Map<String, PlayerRenderer> playerSkinMap = Minecraft.getInstance().getEntityRenderDispatcher().getSkinMap();

@@ -62,16 +62,32 @@ public class ChatPromptScreen extends Screen {
         super.init();
         PacketHandler.sendToServer(new CRequestSyncWorldDataPacket());
         PacketHandler.sendToServer(new CRequestSyncQuestDataPacket());
+        Quest questHaveToDo = questerEntity.questPreviouslyDone;
         Quest npcQuest = questerEntity.questGiving;
         guiLeft = (this.width - this.xSize) / 2;
         guiTop = (this.height - this.ySize) / 2;
         int posX = (this.width - 256) / 2;
         int posY = (this.height - 256) / 2;
+        boolean finishedquest = false;
+        if (questerEntity.previousQuestObliged)
+        {
+            for (int i = 0; i < questData.getFinishedQuests().size(); i++) {
+                if (questData.getFinishedQuests().get(i) != null && questData.getFinishedQuests().get(i).getId().equals(questHaveToDo.getId())) {
+                    finishedquest = true;
+                    break;
+                }
+            }
+        }
+        if (!finishedquest && questerEntity.previousQuestObliged)
+        {
+            System.out.println("Won't accept quest");
+            this.message = new SequencedString(questerEntity.denialSpeechPreviousQuest + "", 245, this.font.width(questerEntity.decliningSpeech) / 2, 2000);
+            this.state = 4;
+        }
         for (int i = 0; i <questData.getInProgressQuests().length; i++)
         {
             if (questData.getInProgressQuest(i) != null && questData.getInProgressQuest(i).getId().equals(npcQuest.getId()))
             {
-                System.out.println("ongoing");
                 this.message = new SequencedString(questerEntity.ongoingSpeech + "", 245, this.font.width(questerEntity.decliningSpeech) / 2, 2000);
                 this.state = 2;
             }

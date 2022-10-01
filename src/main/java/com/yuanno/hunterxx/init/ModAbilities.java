@@ -1,6 +1,7 @@
 package com.yuanno.hunterxx.init;
 
 import com.yuanno.hunterxx.Main;
+import com.yuanno.hunterxx.abilities.basic.RenAbility;
 import com.yuanno.hunterxx.abilities.basic.TenAbility;
 import com.yuanno.hunterxx.abilities.basic.ZetsuAbility;
 import com.yuanno.hunterxx.api.Beapi;
@@ -26,7 +27,7 @@ public class ModAbilities {
     public static final IForgeRegistry<Ability> ABILITIES_REGISTRY = RegistryManager.ACTIVE.getRegistry(Ability.class);
     private static final DeferredRegister<Ability> ABILITIES = DeferredRegister.create(ABILITIES_REGISTRY, Main.MODID);
 
-    public static final Ability[] BASIC_NEN = {TenAbility.INSTANCE, ZetsuAbility.INSTANCE};
+    public static final Ability[] BASIC_NEN = {TenAbility.INSTANCE, RenAbility.INSTANCE, ZetsuAbility.INSTANCE};
 
     private static Ability registerAbility(Ability ability)
     {

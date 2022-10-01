@@ -21,6 +21,9 @@ import net.minecraft.world.World;
 
 public abstract class QuesterEntity extends CreatureEntity {
 
+    public Quest questPreviouslyDone;
+    public boolean previousQuestObliged = false;
+    public String denialSpeechPreviousQuest;
     public Quest questGiving;
     public String questSpeech;
     public String acceptanceSpeech;
