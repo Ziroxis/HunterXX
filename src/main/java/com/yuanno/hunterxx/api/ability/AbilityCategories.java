@@ -22,12 +22,20 @@ public class AbilityCategories {
 
         return icon;
     };
+    private static final Function<PlayerEntity, ResourceLocation> GET_ADVANCED_ICON = (player) ->
+    {
+        IEntityStats props = EntityStatsCapability.get(player);
+        ResourceLocation icon = null;
+        icon = new ResourceLocation(Main.MODID, "textures/gui/icons/advanced.png");
 
+        return icon;
+    };
 
     public static enum AbilityCategory implements IExtensibleEnum
     {
         HATSU,
         BASIC_NEN(GET_BASIC_ICON),
+        ADVANCED_NEN(GET_ADVANCED_ICON),
         ALL;
 
         private Function<PlayerEntity, ResourceLocation> iconFunction;

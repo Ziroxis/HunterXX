@@ -1,5 +1,6 @@
 package com.yuanno.hunterxx.client.handler;
 
+import com.yuanno.hunterxx.client.overlay.AuraLayer;
 import com.yuanno.hunterxx.client.overlay.renderer.TenModelRenderer;
 import com.yuanno.hunterxx.client.renderer.*;
 import com.yuanno.hunterxx.entity.questers.nen.EntityNenTeacher;

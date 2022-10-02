@@ -7,7 +7,6 @@ import com.yuanno.hunterxx.api.Quest.Objective;
 import com.yuanno.hunterxx.api.Quest.Quest;
 import com.yuanno.hunterxx.api.Quest.objectives.BrewPotionObjective;
 import com.yuanno.hunterxx.api.Quest.objectives.KillEntityObjective;
-import com.yuanno.hunterxx.api.Quest.objectives.StandStillObjective;
 import com.yuanno.hunterxx.api.Quest.objectives.TimedSurvivalObjective;
 import com.yuanno.hunterxx.data.ability.AbilityDataCapability;
 import com.yuanno.hunterxx.data.ability.IAbilityData;
@@ -16,6 +15,7 @@ import com.yuanno.hunterxx.data.entity.IEntityStats;
 import com.yuanno.hunterxx.init.ModQuests;
 import com.yuanno.hunterxx.networking.PacketHandler;
 import com.yuanno.hunterxx.networking.client.CSyncAbilityDataPacket;
+import com.yuanno.hunterxx.networking.client.CSyncentityStatsPacket;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.potion.Effect;
 import net.minecraft.potion.Effects;
@@ -46,10 +46,9 @@ public class UnlockingNenQuest extends Quest {
         abilityData.addUnlockedAbility(TenAbility.INSTANCE);
         abilityData.addUnlockedAbility(RenAbility.INSTANCE);
         abilityData.addUnlockedAbility(ZetsuAbility.INSTANCE);
-        entityStats.alterAura(50);
-        entityStats.alterMaxAura(50);
-        entityStats.alterAuraRegeneration(1);
+        entityStats.setHasNen(true);
         PacketHandler.sendToServer(new CSyncAbilityDataPacket(abilityData));
+        PacketHandler.sendToServer(new CSyncentityStatsPacket(entityStats));
 
         return true;
     }

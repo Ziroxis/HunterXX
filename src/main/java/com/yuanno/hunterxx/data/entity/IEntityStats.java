@@ -64,4 +64,6 @@ public interface IEntityStats {
     void alterJenny(int value);
     void setJenny(int value);
 
+    boolean getHasNen();
+    void setHasNen(boolean value);
 }

@@ -46,6 +46,8 @@ public class EntityStatsCapability {
                 //jenny
                 props.putInt("jenny", instance.getJenny());
 
+                //nen
+                props.putBoolean("hasNen", instance.getHasNen());
                 return props;
             }
 
@@ -78,6 +80,9 @@ public class EntityStatsCapability {
 
                 //jenny
                 instance.setJenny(props.getInt("jenny"));
+
+                //nen
+                instance.setHasNen(props.getBoolean("hasNen"));
             }
         }, () -> new EntityStatsBase());
 

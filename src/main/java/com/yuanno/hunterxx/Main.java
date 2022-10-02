@@ -55,6 +55,7 @@ public class Main
         ClientHandler.onSetup();
         ModKeyBinds.init();
         MinecraftForge.EVENT_BUS.register(new NenBarOverlay());
+        ModRenderers.registerRenderers();
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event)

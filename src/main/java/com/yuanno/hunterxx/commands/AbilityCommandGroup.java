@@ -1,7 +1,6 @@
 package com.yuanno.hunterxx.commands;
 
 import com.yuanno.hunterxx.api.ability.Ability;
-import com.yuanno.hunterxx.api.ability.AbilityCommandGroup;
 import com.yuanno.hunterxx.init.ModAbilities;
 import net.minecraftforge.common.IExtensibleEnum;
 
@@ -9,14 +8,15 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Supplier;
 
-public enum AbilityComandGroup implements IExtensibleEnum
+public enum AbilityCommandGroup implements IExtensibleEnum
 {
 
-    BASIC_NEN(() -> ModAbilities.BASIC_NEN);
+    BASIC_NEN(() -> ModAbilities.BASIC_NEN),
+    ADVANCED_NEN(() -> ModAbilities.ADVANCED_NEN);
 
     private Supplier<Ability[]> abilities;
 
-    private AbilityComandGroup(Supplier<Ability[]> abilities)
+    private AbilityCommandGroup(Supplier<Ability[]> abilities)
     {
         this.abilities = abilities;
     }

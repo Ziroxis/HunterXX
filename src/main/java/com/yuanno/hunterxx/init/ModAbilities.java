@@ -1,6 +1,7 @@
 package com.yuanno.hunterxx.init;
 
 import com.yuanno.hunterxx.Main;
+import com.yuanno.hunterxx.abilities.advanced.GyoAbility;
 import com.yuanno.hunterxx.abilities.basic.RenAbility;
 import com.yuanno.hunterxx.abilities.basic.TenAbility;
 import com.yuanno.hunterxx.abilities.basic.ZetsuAbility;
@@ -28,6 +29,7 @@ public class ModAbilities {
     private static final DeferredRegister<Ability> ABILITIES = DeferredRegister.create(ABILITIES_REGISTRY, Main.MODID);
 
     public static final Ability[] BASIC_NEN = {TenAbility.INSTANCE, RenAbility.INSTANCE, ZetsuAbility.INSTANCE};
+    public static final Ability[] ADVANCED_NEN = {GyoAbility.INSTANCE};
 
     private static Ability registerAbility(Ability ability)
     {
@@ -49,6 +51,7 @@ public class ModAbilities {
 
     public static void register(IEventBus eventBus)
     {
+        registerAbilities(ADVANCED_NEN);
         registerAbilities(BASIC_NEN);
         ABILITIES.register(eventBus);
     }

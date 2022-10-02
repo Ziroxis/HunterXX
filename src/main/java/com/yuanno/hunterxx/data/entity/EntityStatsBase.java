@@ -17,6 +17,7 @@ public class EntityStatsBase implements IEntityStats {
     private int auraRegeneration;
     private String category = "";
     private int jenny;
+    private boolean hasNen;
 
 
     @Override
@@ -232,5 +233,15 @@ public class EntityStatsBase implements IEntityStats {
     @Override
     public void setJenny(int value) {
         this.jenny = value;
+    }
+
+    @Override
+    public boolean getHasNen() {
+        return this.hasNen;
+    }
+
+    @Override
+    public void setHasNen(boolean value) {
+        this.hasNen = value;
     }
 }

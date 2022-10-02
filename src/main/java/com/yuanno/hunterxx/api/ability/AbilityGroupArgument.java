@@ -6,6 +6,7 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
+import com.yuanno.hunterxx.commands.AbilityCommandGroup;
 import net.minecraft.command.ISuggestionProvider;
 
 import java.util.Collection;

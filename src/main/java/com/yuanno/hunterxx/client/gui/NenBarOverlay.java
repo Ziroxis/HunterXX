@@ -28,7 +28,7 @@ public class NenBarOverlay {
 
         if (event.getType() == RenderGameOverlayEvent.ElementType.TEXT)
         {
-            if (entityStats.getCombatMode() && entityStats.getMaxAura() > 0)
+            if (entityStats.getCombatMode() && entityStats.getHasNen())
             {
                 Minecraft mc = Minecraft.getInstance();
 

@@ -39,10 +39,11 @@ public class SpawningEvent {
 
             // NEN
             stats.setCategory(Beapi.randomizer(ModValues.CATEGORIES));
-            stats.setAura(0);
-            stats.setAuraRegeneration(0);
-            stats.setMaxAura(0);
+            stats.setAura(50);
+            stats.setAuraRegeneration(1);
+            stats.setMaxAura(50);
             stats.setNen(0);
+            stats.setHasNen(false);
 
             // STATS
             stats.setSpeed(0);

@@ -4,6 +4,8 @@ import com.yuanno.hunterxx.api.ability.Ability;
 import com.yuanno.hunterxx.api.ability.AbilityCategories;
 import com.yuanno.hunterxx.api.ability.interfaces.IParallelContinuousAbility;
 import com.yuanno.hunterxx.api.ability.sorts.ContinuousAbility;
+import com.yuanno.hunterxx.data.ability.AbilityDataCapability;
+import com.yuanno.hunterxx.data.ability.IAbilityData;
 import com.yuanno.hunterxx.init.ModAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.PlayerEntity;
@@ -36,6 +38,12 @@ public class TenAbility extends ContinuousAbility implements IParallelContinuous
 
     private boolean onStartContinuityEvent(PlayerEntity player)
     {
+        IAbilityData abilityData = AbilityDataCapability.get(player);
+        Ability renAbility = abilityData.getEquippedAbility(RenAbility.INSTANCE);
+        Ability zetsuAbility = abilityData.getEquippedAbility(ZetsuAbility.INSTANCE);
+        if (renAbility != null && renAbility.isContinuous() || zetsuAbility != null && zetsuAbility.isContinuous())
+            return false;
+
         player.getAttribute(ModAttributes.DAMAGE_REDUCTION.get()).addTransientModifier(TEN_ABILITY);
         return true;
     }

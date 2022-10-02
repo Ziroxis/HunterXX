@@ -5,6 +5,7 @@ import com.yuanno.hunterxx.Main;
 import com.yuanno.hunterxx.api.ability.Ability;
 import com.yuanno.hunterxx.commands.AbilityCommand;
 import com.yuanno.hunterxx.commands.PointsCommand;
+import com.yuanno.hunterxx.commands.UnlockNenCommand;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
@@ -19,5 +20,6 @@ public class ForgeSetup {
 
         PointsCommand.register(dispatcher);
         AbilityCommand.register(dispatcher);
+        UnlockNenCommand.register(dispatcher);
     }
 }
