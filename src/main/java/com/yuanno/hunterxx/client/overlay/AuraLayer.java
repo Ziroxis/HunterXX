@@ -2,15 +2,21 @@ package com.yuanno.hunterxx.client.overlay;
 
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
-import com.yuanno.hunterxx.abilities.advanced.GyoAbility;
+import com.yuanno.hunterxx.abilities.advanced.*;
+import com.yuanno.hunterxx.abilities.basic.TenAbility;
 import com.yuanno.hunterxx.abilities.basic.ZetsuAbility;
 import com.yuanno.hunterxx.api.Beapi;
 import com.yuanno.hunterxx.api.ability.Ability;
+import com.yuanno.hunterxx.client.overlay.model.GyoModel;
+import com.yuanno.hunterxx.client.overlay.model.KenModel;
+import com.yuanno.hunterxx.client.overlay.model.KoModel;
+import com.yuanno.hunterxx.client.overlay.model.TenModel;
 import com.yuanno.hunterxx.data.ability.AbilityDataCapability;
 import com.yuanno.hunterxx.data.ability.IAbilityData;
 import com.yuanno.hunterxx.init.ModRenderTypes;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.IRenderTypeBuffer;
+import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.OutlineLayerBuffer;
 import net.minecraft.client.renderer.entity.IEntityRenderer;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
@@ -24,6 +30,14 @@ import net.minecraft.entity.player.PlayerEntity;
 import java.awt.*;
 
 public class AuraLayer<T extends LivingEntity, M extends EntityModel<T>> extends LayerRenderer<T, M> {
+    private GyoModel gyoModel = new GyoModel();
+    private KenModel kenModel = new KenModel();
+    private KoModel koModel = new KoModel();
+    private TenModel tenModel = new TenModel();
+
+
+
+
     public AuraLayer(IEntityRenderer<T, M> entityRenderer)
     {
         super(entityRenderer);
@@ -37,25 +51,22 @@ public class AuraLayer<T extends LivingEntity, M extends EntityModel<T>> extends
         if (entity == player)
             return;
 
-        System.out.println("Check 1");
         IAbilityData abilityData = AbilityDataCapability.get(player);
         Ability gyoAbility = abilityData.getEquippedAbility(GyoAbility.INSTANCE);
         if (gyoAbility != null && gyoAbility.isContinuous())
         {
-            System.out.println("Check 2");
             if (entity.distanceTo(player) > 32)
                 return;
-            System.out.println("Check 3");
 
             if (entity instanceof PlayerEntity)
             {
                 PlayerEntity targetEntity = (PlayerEntity) entity;
                 IAbilityData abilityDataTarget = AbilityDataCapability.get(targetEntity);
                 ZetsuAbility zetsuAbility = abilityDataTarget.getEquippedAbility(ZetsuAbility.INSTANCE);
+
                 if (zetsuAbility != null && zetsuAbility.isContinuous())
                     return;
             }
-            System.out.println("Check 4");
 
             matrixStack.pushPose();
 

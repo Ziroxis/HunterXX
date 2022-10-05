@@ -1,6 +1,7 @@
 package com.yuanno.hunterxx;
 
 import com.yuanno.hunterxx.client.overlay.AuraLayer;
+import com.yuanno.hunterxx.client.overlay.renderer.EnModelRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.LivingRenderer;
@@ -20,6 +21,7 @@ public class ModRenderers {
             {
                 LivingRenderer renderer = (LivingRenderer) entityRenderer;
                 renderer.addLayer(new AuraLayer(renderer));
+
             }
         }
 
@@ -27,6 +29,7 @@ public class ModRenderers {
         {
             PlayerRenderer renderer = entry.getValue();
             renderer.addLayer(new AuraLayer(renderer));
+
         }
     }
 }

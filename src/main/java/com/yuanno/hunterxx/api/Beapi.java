@@ -5,6 +5,10 @@ import com.google.common.collect.Lists;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.yuanno.hunterxx.Main;
+import com.yuanno.hunterxx.data.entity.EntityStatsCapability;
+import com.yuanno.hunterxx.data.entity.IEntityStats;
+import com.yuanno.hunterxx.init.ModRegistry;
+import com.yuanno.hunterxx.init.ModValues;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
@@ -52,7 +56,15 @@ public class Beapi
     {
         return entity.getLookAngle().multiply(extraVelX, extraVelY, extraVelZ);
     }
+    public static <T extends Entity> RegistryObject<EntityType<T>> registerEntityType(String localizedName, Supplier<EntityType<T>> supp)
+    {
+        String resourceName = Beapi.getResourceName(localizedName);
+        Beapi.getLangMap().put("entity." + Main.MODID + "." + resourceName, localizedName);
 
+        RegistryObject<EntityType<T>> reg = ModRegistry.ENTITY_TYPES.register(resourceName, supp);
+
+        return reg;
+    }
     public static String randomizer(String[] values)
     {
         int random = RNG(values.length);
@@ -60,6 +72,31 @@ public class Beapi
         return randomizedString;
     }
 
+    public static double valueCategory(PlayerEntity player, String categoryTarget)
+    {
+        double modCategory = 0;
+        List<String> nenTypes = new ArrayList<String>();
+        nenTypes.add(ModValues.ENHANCEMENT);
+        nenTypes.add(ModValues.TRANSMUTATION);
+        nenTypes.add(ModValues.CONJURATION);
+        nenTypes.add(ModValues.SPECIALIST);
+        nenTypes.add(ModValues.MANIPULATION);
+        nenTypes.add(ModValues.EMISSION);
+        IEntityStats entityStats = EntityStatsCapability.get(player);
+        String categoryPlayer = entityStats.getCategory();
+        int indexPlayer = nenTypes.indexOf(categoryPlayer);
+        int indexTarget = nenTypes.indexOf(categoryTarget);
+        int differenceIndex = indexPlayer - indexTarget;
+        if (differenceIndex == 0)
+            modCategory = 1;
+        else if (differenceIndex == 1 || differenceIndex == -1 || differenceIndex == 5 || differenceIndex == -5)
+            modCategory = 0.8;
+        else if (differenceIndex == 2 || differenceIndex == -2 || differenceIndex == 4 || differenceIndex == -4)
+            modCategory = 0.6;
+        else if (differenceIndex == 3 || differenceIndex == -3)
+            modCategory = 0.4;
+        return modCategory;
+    }
 
     public static <T extends Entity> List<T> getEntitiesAround(BlockPos pos, World world, double diameter)
     {

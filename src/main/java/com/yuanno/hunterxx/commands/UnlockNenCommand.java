@@ -41,8 +41,8 @@ public class UnlockNenCommand {
     private static int setPoints(CommandSource commandSource, PlayerEntity player, String set)
     {
         IEntityStats entityStats = EntityStatsCapability.get(player);
-
-        entityStats.setHasNen(true);
+        if (set.equals("UNLOCK"))
+            entityStats.setHasNen(true);
         PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), entityStats), player);
         commandSource.sendSuccess(new TranslationTextComponent(player.getDisplayName().getString() + " unlocked nen"), true);
 
