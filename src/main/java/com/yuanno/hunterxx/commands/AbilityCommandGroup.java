@@ -12,7 +12,8 @@ public enum AbilityCommandGroup implements IExtensibleEnum
 {
 
     BASIC_NEN(() -> ModAbilities.BASIC_NEN),
-    ADVANCED_NEN(() -> ModAbilities.ADVANCED_NEN);
+    ADVANCED_NEN(() -> ModAbilities.ADVANCED_NEN),
+    BASIC_HATSU(() -> ModAbilities.BASIC_HATSU);
 
     private Supplier<Ability[]> abilities;
 

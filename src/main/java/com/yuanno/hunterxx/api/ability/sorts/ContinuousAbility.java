@@ -61,10 +61,13 @@ public abstract class ContinuousAbility extends Ability {
             if (this.onStartContinuityEvent.onStartContinuity(player))
             {
                 this.checkAbilityPool(player, State.CONTINUOUS);
+                IEntityStats entityStats = EntityStatsCapability.get(player);
 
-
-                this.startContinuity(player);
-                PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, this), player);
+                if (entityStats.getAura() > this.getauraCost() * 2)
+                {
+                    this.startContinuity(player);
+                    PacketHandler.sendToAllTrackingAndSelf(new SUpdateEquippedAbilityPacket(player, this), player);
+                }
             }
         }
         else

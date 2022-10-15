@@ -19,7 +19,7 @@ public class KenAbility extends ContinuousAbility {
     public static final UUID kenUUID = UUID.fromString("40a61b18-44e4-11ed-b878-0242ac120002");
 
     public KenAbility() {
-        super("Ko", AbilityCategories.AbilityCategory.ADVANCED_NEN);
+        super("Ken", AbilityCategories.AbilityCategory.ADVANCED_NEN);
         this.setDescription("Enhvelops yourself with even more passive aura.\nAn evolved form of ten");
         this.setMaxCooldown(3);
         this.setauraCost(15);

@@ -1,4 +1,4 @@
-package com.yuanno.hunterxx.events;
+package com.yuanno.hunterxx.events.abilities;
 
 import com.yuanno.hunterxx.Main;
 import com.yuanno.hunterxx.abilities.advanced.ShuAbility;

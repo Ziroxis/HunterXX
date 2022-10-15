@@ -17,7 +17,6 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-// The value here should match an entry in the META-INF/mods.toml file
 @Mod("hunterxx")
 public class Main
 {
@@ -32,6 +31,7 @@ public class Main
         ModItems.ITEMS.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(new AttachingCapability.Registry());
         ModAttributes.ATTRIBUTES.register(modEventBus);
+        ModEffects.EFFECTS.register(modEventBus);
         ModEntities.ENTITIES.register(modEventBus);
         ModAbilities.register(modEventBus);
         ModQuests.QUESTS.register(modEventBus);

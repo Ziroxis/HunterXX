@@ -5,6 +5,7 @@ import com.yuanno.hunterxx.abilities.advanced.*;
 import com.yuanno.hunterxx.abilities.basic.RenAbility;
 import com.yuanno.hunterxx.abilities.basic.TenAbility;
 import com.yuanno.hunterxx.abilities.basic.ZetsuAbility;
+import com.yuanno.hunterxx.abilities.basic_hatsu.*;
 import com.yuanno.hunterxx.api.Beapi;
 import com.yuanno.hunterxx.api.ability.Ability;
 import net.minecraft.util.ResourceLocation;
@@ -30,7 +31,7 @@ public class ModAbilities {
 
     public static final Ability[] BASIC_NEN = {TenAbility.INSTANCE, RenAbility.INSTANCE, ZetsuAbility.INSTANCE};
     public static final Ability[] ADVANCED_NEN = {GyoAbility.INSTANCE, InAbiltiy.INSTANCE, EnAbility.INSTANCE, ShuAbility.INSTANCE, KoAbility.INSTANCE, KenAbility.INSTANCE, RyuAbility.INSTANCE};
-
+    public static final Ability[] BASIC_HATSU = {BasicEnhancerAbility.INSTANCE, BasicEmissionAbility.INSTANCE, BasicTransmuterAbility.INSTANCE, BasicConjurerAbility.INSTANCE, BasicManipulationAbility.INSTANCE};
     private static Ability registerAbility(Ability ability)
     {
         String resourceName = Beapi.getResourceName(ability.getName());
@@ -51,6 +52,7 @@ public class ModAbilities {
 
     public static void register(IEventBus eventBus)
     {
+        registerAbilities(BASIC_HATSU);
         registerAbilities(ADVANCED_NEN);
         registerAbilities(BASIC_NEN);
         ABILITIES.register(eventBus);

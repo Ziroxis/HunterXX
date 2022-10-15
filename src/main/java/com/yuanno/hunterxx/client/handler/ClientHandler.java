@@ -60,6 +60,7 @@ public class ClientHandler {
         List<LayerRenderer<AbstractClientPlayerEntity, PlayerModel<AbstractClientPlayerEntity>>> layers = ObfuscationReflectionHelper.getPrivateValue(LivingRenderer.class, renderer, "field_177097_h");
         if(layers != null)
         {
+            layers.add(new BasicTransmutationRenderer<>(renderer));
             layers.add(new TenModelRenderer<>(renderer));
             layers.add(new GyoModelRenderer<>(renderer));
             layers.add(new KenModelRenderer<>(renderer));

@@ -72,9 +72,9 @@ public class Beapi
         return randomizedString;
     }
 
-    public static double valueCategory(PlayerEntity player, String categoryTarget)
+    public static float valueCategory(PlayerEntity player, String categoryTarget)
     {
-        double modCategory = 0;
+        float modCategory = 0;
         List<String> nenTypes = new ArrayList<String>();
         nenTypes.add(ModValues.ENHANCEMENT);
         nenTypes.add(ModValues.TRANSMUTATION);
@@ -90,11 +90,11 @@ public class Beapi
         if (differenceIndex == 0)
             modCategory = 1;
         else if (differenceIndex == 1 || differenceIndex == -1 || differenceIndex == 5 || differenceIndex == -5)
-            modCategory = 0.8;
+            modCategory = 0.8f;
         else if (differenceIndex == 2 || differenceIndex == -2 || differenceIndex == 4 || differenceIndex == -4)
-            modCategory = 0.6;
+            modCategory = 0.6f;
         else if (differenceIndex == 3 || differenceIndex == -3)
-            modCategory = 0.4;
+            modCategory = 0.4f;
         return modCategory;
     }
 

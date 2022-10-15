@@ -46,6 +46,7 @@ public class AuraLayer<T extends LivingEntity, M extends EntityModel<T>> extends
     @Override
     public void render(MatrixStack matrixStack, IRenderTypeBuffer buffer, int packedLight, T entity, float limbSwing, float limbSwingAmount, float partialTicks, float ageInTicks, float netHeadYaw, float headPitch)
     {
+        //TODO make it so gyo activated causes you to see all the stuff
         PlayerEntity player = Minecraft.getInstance().player;
 
         if (entity == player)
