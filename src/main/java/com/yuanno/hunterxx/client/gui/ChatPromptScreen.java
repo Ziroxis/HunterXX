@@ -68,6 +68,7 @@ public class ChatPromptScreen extends Screen {
         guiTop = (this.height - this.ySize) / 2;
         int posX = (this.width - 256) / 2;
         int posY = (this.height - 256) / 2;
+
         boolean finishedquest = false;
         if (questerEntity.previousQuestObliged)
         {
@@ -80,7 +81,6 @@ public class ChatPromptScreen extends Screen {
         }
         if (!finishedquest && questerEntity.previousQuestObliged)
         {
-            System.out.println("Won't accept quest");
             this.message = new SequencedString(questerEntity.denialSpeechPreviousQuest + "", 245, this.font.width(questerEntity.decliningSpeech) / 2, 2000);
             this.state = 4;
         }
@@ -96,7 +96,6 @@ public class ChatPromptScreen extends Screen {
         {
             if (questData.getFinishedQuests().get(i) != null && questData.getFinishedQuests().get(i).getId().equals(npcQuest.getId()))
             {
-                System.out.println("ended");
                 this.message = new SequencedString(questerEntity.doneSpeech + "", 245, this.font.width(questerEntity.decliningSpeech) / 2, 2000);
                 this.state = 3;
             }
@@ -129,13 +128,11 @@ public class ChatPromptScreen extends Screen {
     }
 
     @Override
-    public void render(MatrixStack matrixStack, int x, int y, float f)
-    {
+    public void render(MatrixStack matrixStack, int x, int y, float f) {
         this.renderBackground(matrixStack);
 
 
-        if (!(this.state == 0))
-        {
+        if (!(this.state == 0)) {
             this.buttons.remove(acceptbutton);
             this.buttons.remove(declinebutton);
         }
@@ -146,64 +143,6 @@ public class ChatPromptScreen extends Screen {
         minecraft.getTextureManager().bind(chatPrompt);
         GuiUtils.drawTexturedModalRect(posX - 128, posY - 125, 0, 0, 256, 256, 0);
         this.message.render(matrixStack, guiLeft - 88, guiTop + 115);
-        super.render(matrixStack, x ,y , f);
-
-        /*
-        if (this.state == 0) {
-            questSpeechrendering(matrixStack);
-        }
-        else if (this.state == 1)
-            acceptanceSpeechrender(matrixStack);
-        else if (this.state == -1)
-            declineSpeechrender(matrixStack);
-        else if (questData.hasInProgressQuest(npcQuest))
-            onGoingSpeechrender(matrixStack);
-        else if (questData.hasFinishedQuest(npcQuest))
-            endingSpeechrender(matrixStack);
-
-         */
+        super.render(matrixStack, x, y, f);
     }
-
-    /*
-    public void questSpeechrendering(MatrixStack matrixStack)
-    {
-        int posX = this.width / 2;
-        int posY = this.height / 2;
-        minecraft.getTextureManager().bind(chatPrompt);
-        GuiUtils.drawTexturedModalRect(posX - 128, posY - 125, 0, 0, 256, 256, 0);
-        IQuestData questProps = QuestDataCapability.get(this.player);
-        //drawString(matrixStack, font, questerEntity.questSpeech + "", guiLeft - 88, guiTop + 100, 16777215);
-    }
-    public void acceptanceSpeechrender(MatrixStack matrixStack)
-    {
-        int posX = this.width / 2;
-        int posY = this.height / 2;
-        minecraft.getTextureManager().bind(chatPrompt);
-        GuiUtils.drawTexturedModalRect(posX - 128, posY - 125, 0, 0, 256, 256, 0);
-    }
-    public void declineSpeechrender(MatrixStack matrixStack)
-    {
-        int posX = this.width / 2;
-        int posY = this.height / 2;
-        minecraft.getTextureManager().bind(chatPrompt);
-        GuiUtils.drawTexturedModalRect(posX - 128, posY - 125, 0, 0, 256, 256, 0);
-    }
-
-    public void onGoingSpeechrender(MatrixStack matrixStack)
-    {
-        int posX = this.width / 2;
-        int posY = this.height / 2;
-        minecraft.getTextureManager().bind(chatPrompt);
-        GuiUtils.drawTexturedModalRect(posX - 128, posY - 125, 0, 0, 256, 256, 0);
-    }
-
-    public void endingSpeechrender(MatrixStack matrixStack)
-    {
-        int posX = this.width / 2;
-        int posY = this.height / 2;
-        minecraft.getTextureManager().bind(chatPrompt);
-        GuiUtils.drawTexturedModalRect(posX - 128, posY - 125, 0, 0, 256, 256, 0);
-    }
-
-     */
 }
