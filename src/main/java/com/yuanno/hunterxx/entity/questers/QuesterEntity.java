@@ -19,6 +19,9 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class QuesterEntity extends CreatureEntity {
 
     public Quest questPreviouslyDone;
@@ -30,6 +33,7 @@ public abstract class QuesterEntity extends CreatureEntity {
     public String decliningSpeech;
     public String ongoingSpeech;
     public String doneSpeech;
+    public List<Quest> questList = new ArrayList<Quest>();
     public QuesterEntity(EntityType type, World world)
     {
         super(type, world);
@@ -52,7 +56,6 @@ public abstract class QuesterEntity extends CreatureEntity {
                 .add(Attributes.MOVEMENT_SPEED, 2);
     }
 
-    /*
     @Override
     public ActionResultType mobInteract(PlayerEntity player, Hand hand)
     {
@@ -62,70 +65,19 @@ public abstract class QuesterEntity extends CreatureEntity {
         {
             IQuestData questData = QuestDataCapability.get(player);
             Quest[] quests = questData.getInProgressQuests();
-            if (!questData.hasFinishedQuest(questGiving) && !questData.hasInProgressQuest(questGiving))
+            for (int i = 0; i < questData.getInProgressQuests().length; i++)
             {
-                for (Quest quest : quests)
+                if (questData.getInProgressQuest(i) != null && questData.getInProgressQuest(i).isComplete() && questList.contains(questData.getInProgressQuest(i)))
                 {
-                    if (quest == null)
-                    {
-                        questData.addInProgressQuest(questGiving);
-                        PacketHandler.sendTo(new SSyncQuestDataPacket(player.getId(), questData), player);
-                        break;
-                    }
-                }
-                PacketHandler.sendTo(new SSyncQuestDataPacket(player.getId(), questData), player);
-                player.sendMessage(new StringTextComponent("Quest given."), player.getUUID());
-            }
-            else if (questData.hasInProgressQuest(questGiving))
-            {
-                for (int i = 0; i<quests.length; i++)
-                {
-                    if (quests[i] != null && quests[i].equals(questGiving) && quests[i].isComplete())
-                    {
-                        PacketHandler.sendTo(new SSyncTriggerQuest(i, player.getId()), player);
-                        questData.addFinishedQuest(quests[i]);
-                        questData.removeInProgressQuest(quests[i]);
-                        PacketHandler.sendTo(new SSyncQuestDataPacket(player.getId(), questData), player);
-                        player.sendMessage(new StringTextComponent("Quest done."), player.getUUID());
-                        return ActionResultType.PASS;
-                    }
-                }
-                player.sendMessage(new StringTextComponent("Quest going."), player.getUUID());
-            }
-            else if (questData.hasFinishedQuest(questGiving)) // if quest finished
-            {
-                player.sendMessage(new StringTextComponent("Already given and done quest."), player.getUUID());
-            }
-        }
-        return ActionResultType.PASS;
-    }
-
-     */
-
-    @Override
-    public ActionResultType mobInteract(PlayerEntity player, Hand hand) {
-        if (hand != Hand.MAIN_HAND)
-            return ActionResultType.PASS;
-        if (!player.level.isClientSide) {
-            IQuestData questData = QuestDataCapability.get(player);
-            Quest[] quests = questData.getInProgressQuests();
-            if (questData.hasInProgressQuest(questGiving))
-            {
-                for (int i = 0; i<quests.length; i++)
-                {
-                    if (quests[i] != null && quests[i].equals(questGiving) && quests[i].isComplete())
-                    {
-                        PacketHandler.sendTo(new SSyncTriggerQuest(i, player.getId()), player);
-                        questData.addFinishedQuest(quests[i]);
-                        questData.removeInProgressQuest(quests[i]);
-                        PacketHandler.sendTo(new SSyncQuestDataPacket(player.getId(), questData), player);
-                        PacketHandler.sendTo(new SOpenChatPromptScreenPacket(this.getId()), player);
-                        return ActionResultType.PASS;
-                    }
+                    PacketHandler.sendTo(new SSyncTriggerQuest(i, player.getId()), player);
+                    questData.addFinishedQuest(questData.getInProgressQuest(i));
+                    questData.removeInProgressQuest(questData.getInProgressQuest(i));
+                    PacketHandler.sendTo(new SSyncQuestDataPacket(player.getId(), questData), player);
+                    PacketHandler.sendTo(new SOpenChatPromptScreenPacket(this.getId()), player);
+                    return ActionResultType.PASS;
                 }
             }
             PacketHandler.sendTo(new SOpenChatPromptScreenPacket(this.getId()), player);
-            return ActionResultType.PASS;
         }
         return ActionResultType.PASS;
     }
