@@ -23,6 +23,8 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.gui.GuiUtils;
 
+import java.io.FilterOutputStream;
+import java.util.Arrays;
 import java.util.HashSet;
 
 @OnlyIn(Dist.CLIENT)
@@ -72,19 +74,53 @@ public class ChatPromptScreen extends Screen {
         int posX = (this.width - 256) / 2;
         int posY = (this.height - 256) / 2;
         this.loop(posX, posY);
-        this.addButton(test);
-        this.addButton(acceptbutton);
-        this.addButton(declinebutton);
+        if (this.test != null && this.acceptButton != null && this.declineButton != null)
+        {
+            this.addButton(test);
+            this.addButton(acceptbutton);
+            this.addButton(declinebutton);
+        }
 
     }
     public void loop(int posX, int posY)
     {
         System.out.println(questData.getFinishedQuests());
-        System.out.println(questerEntity.questList);
-        long amount = questData.getFinishedQuests().stream().filter(element -> questerEntity.questList.contains(element)).count();
+        System.out.println(Arrays.toString(questData.getInProgressQuests()));
+        int amount = 0;
+        for (int i = 0; i < questData.getFinishedQuests().size(); i++)
+        {
+            for (int ia = 0; ia < questerEntity.questList.size(); ia++)
+            {
+                if (questData.getFinishedQuests().get(i).getId().equals(questerEntity.questList.get(ia).getId())) {
+                    amount++;
+                }
+            }
+        }
 
+        for (int i = 0; i < questData.getInProgressQuests().length; i++) {
+            if (questData.getInProgressQuest(i) != null)
+            {
+                for (int ia = 0; ia < questerEntity.questList.size(); ia++)
+                {
+                    if (questerEntity.questList.get(ia) != null && questData.getInProgressQuest(i).getId().equals(questerEntity.questList.get(ia).getId())) {
+                        this.message = new SequencedString(questerEntity.ongoingSpeech + "", 245, this.font.width(questerEntity.questSpeech) / 2, 2000); // -> first time talking to the npc
+                        return;
+                    }
+                }
+            }
+            else break;
+        }
+
+        int amountPermanent = amount;
+        //System.out.println(amountPermanent);
+        //System.out.println(questerEntity.questList.size());
+        if (amountPermanent >= questerEntity.questList.size())
+        {
+            this.message = new SequencedString(questerEntity.doneSpeech + "", 245, this.font.width(questerEntity.questSpeech) / 2, 2000); // -> first time talking to the npc
+            return;
+        }
         Quest firstQuest = questerEntity.questList.iterator().next();
-        if (!questData.getFinishedQuests().contains(firstQuest))
+        if (questData.getFinishedQuests().size() == 0)
         {
             this.message = new SequencedString(questerEntity.questSpeech + "", 245, this.font.width(questerEntity.questSpeech) / 2, 2000); // -> first time talking to the npc
             test = new TexturedIconButton(acceptButton, posX + 800, posY + 800, 32, 32, new TranslationTextComponent(""), b ->
@@ -104,61 +140,23 @@ public class ChatPromptScreen extends Screen {
                 this.message = new SequencedString(questerEntity.decliningSpeech + "", 245, this.font.width(questerEntity.decliningSpeech) / 2, 2000);
                 this.state = -1;
             }); // -> declining the quest
-            return;
-        }
-        else if (questerEntity.questList.size() > amount)
-        {
-            this.message = new SequencedString(questerEntity.questSpeech + "", 245, this.font.width(questerEntity.questSpeech) / 2, 2000); // -> first time talking to the npc
-            test = new TexturedIconButton(acceptButton, posX + 800, posY + 800, 32, 32, new TranslationTextComponent(""), b ->
-            {
-                //just a button to remove the giant black square
-            });
-            acceptbutton = new TexturedIconButton(acceptButton, posX + 10, posY + 230, 32, 32, new TranslationTextComponent(""), b ->
-            {
-                this.questData.addInProgressQuest(questerEntity.questList.get((int) amount - 1));
-                PacketHandler.sendToServer(new CUpdateQuestStatePacket(questerEntity.questList.get((int) amount - 1)));
-                PacketHandler.sendToServer(new CRequestSyncQuestDataPacket());
-                this.state = 1;
-                this.message = new SequencedString(questerEntity.acceptanceSpeech + "", 245, this.font.width(questerEntity.decliningSpeech) / 2, 2000);
-            }); // -> accepting the quest
-            declinebutton = new TexturedIconButton(declineButton, posX + 180, posY + 230, 32, 32, new TranslationTextComponent(""), b ->
-            {
-                this.message = new SequencedString(questerEntity.decliningSpeech + "", 245, this.font.width(questerEntity.decliningSpeech) / 2, 2000);
-                this.state = -1;
-            }); // -> declining the quest
-            return;
-        }
-        else
-        {
-            this.message = new SequencedString(questerEntity.doneSpeech + "", 245, this.font.width(questerEntity.doneSpeech) / 2, 2000);
-            return;
-        }
 
-
-
-        /*
-        for (int i = 0; i < questerEntity.questList.size(); i++)
+        }
+        for (int i = 0; i< questData.getFinishedQuests().size(); i++)
         {
-            if (questData.getFinishedQuests().containsAll(questerEntity.questList))
+            if (questData.getFinishedQuests().get(i) != null && questData.getFinishedQuests().get(i).getId().equals(firstQuest.getId()))
             {
-                this.message = new SequencedString(questerEntity.doneSpeech + "", 245, this.font.width(questerEntity.doneSpeech) / 2, 2000);
-                return;
-            }
-            Quest quest = questerEntity.questList.get(i);
-            if (questData.getFinishedQuests().size() == 0)
-            {
-                if (questData.countInProgressQuests() == 0)
+                if (questerEntity.questList.size() > amount)
                 {
                     this.message = new SequencedString(questerEntity.questSpeech + "", 245, this.font.width(questerEntity.questSpeech) / 2, 2000); // -> first time talking to the npc
                     test = new TexturedIconButton(acceptButton, posX + 800, posY + 800, 32, 32, new TranslationTextComponent(""), b ->
                     {
                         //just a button to remove the giant black square
                     });
-                    int finalI = i;
                     acceptbutton = new TexturedIconButton(acceptButton, posX + 10, posY + 230, 32, 32, new TranslationTextComponent(""), b ->
                     {
-                        this.questData.addInProgressQuest(questerEntity.questList.get(finalI));
-                        PacketHandler.sendToServer(new CUpdateQuestStatePacket(questerEntity.questList.get(finalI)));
+                        this.questData.addInProgressQuest(questerEntity.questList.get((int) amountPermanent));
+                        PacketHandler.sendToServer(new CUpdateQuestStatePacket(questerEntity.questList.get((int) amountPermanent)));
                         PacketHandler.sendToServer(new CRequestSyncQuestDataPacket());
                         this.state = 1;
                         this.message = new SequencedString(questerEntity.acceptanceSpeech + "", 245, this.font.width(questerEntity.decliningSpeech) / 2, 2000);
@@ -168,83 +166,34 @@ public class ChatPromptScreen extends Screen {
                         this.message = new SequencedString(questerEntity.decliningSpeech + "", 245, this.font.width(questerEntity.decliningSpeech) / 2, 2000);
                         this.state = -1;
                     }); // -> declining the quest
-                    return;
+                }
+                else
+                {
+                    this.message = new SequencedString(questerEntity.doneSpeech + "", 245, this.font.width(questerEntity.doneSpeech) / 2, 2000);
                 }
             }
-            for (int ic = 0; ic < questData.getInProgressQuests().length; ic++)
+            else
             {
-                if (questData.getInProgressQuest(ic) != null && questData.getInProgressQuest(ic).getId().equals(questerEntity.questList.get(i).getId()))
+                this.message = new SequencedString(questerEntity.questSpeech + "", 245, this.font.width(questerEntity.questSpeech) / 2, 2000); // -> first time talking to the npc
+                test = new TexturedIconButton(acceptButton, posX + 800, posY + 800, 32, 32, new TranslationTextComponent(""), b ->
                 {
-                    this.message = new SequencedString(questerEntity.ongoingSpeech + "", 245, this.font.width(questerEntity.decliningSpeech) / 2, 2000);
-                    break;
-                }
-            }
-            for (int ia = 0; ia < questData.getFinishedQuests().size(); ia++)
-            {
-                System.out.println("Check 3");
-                if (questData.getFinishedQuests().get(ia) != null && !(questData.getFinishedQuests().get(ia).getId().equals(questerEntity.questList.get(i).getId())))
+                    //just a button to remove the giant black square
+                });
+                acceptbutton = new TexturedIconButton(acceptButton, posX + 10, posY + 230, 32, 32, new TranslationTextComponent(""), b ->
                 {
-                    System.out.println("Check 4");
-                    // if a quest in the list of the questerEntity is NOT done
-                    if (questData.countInProgressQuests() > 0)
-                    {
-                        for (int ib = 0; ib < questData.countInProgressQuests(); ib++) {
-                            {
-                                System.out.println("Check 5");
-                                if (questData.getInProgressQuest(ib) != null && !(questData.getInProgressQuest(ib).getId().equals(questerEntity.questList.get(i).getId()))) {
-                                    System.out.println("Check 6");
-                                    //if a quest in the list of the questerentity is NOT done and NOT in progress
-                                    // start adding the button to accept or denie the quest
-                                    this.message = new SequencedString(questerEntity.questSpeech + "", 245, this.font.width(questerEntity.questSpeech) / 2, 2000); // -> first time talking to the npc
-                                    test = new TexturedIconButton(acceptButton, posX + 800, posY + 800, 32, 32, new TranslationTextComponent(""), b ->
-                                    {
-                                        //just a button to remove the giant black square
-                                    });
-                                    acceptbutton = new TexturedIconButton(acceptButton, posX + 10, posY + 230, 32, 32, new TranslationTextComponent(""), b ->
-                                    {
-                                        this.questData.addInProgressQuest(quest);
-                                        PacketHandler.sendToServer(new CUpdateQuestStatePacket(quest));
-                                        PacketHandler.sendToServer(new CRequestSyncQuestDataPacket());
-                                        this.state = 1;
-                                        this.message = new SequencedString(questerEntity.acceptanceSpeech + "", 245, this.font.width(questerEntity.decliningSpeech) / 2, 2000);
-                                    }); // -> accepting the quest
-                                    declinebutton = new TexturedIconButton(declineButton, posX + 180, posY + 230, 32, 32, new TranslationTextComponent(""), b ->
-                                    {
-                                        this.message = new SequencedString(questerEntity.decliningSpeech + "", 245, this.font.width(questerEntity.decliningSpeech) / 2, 2000);
-                                        this.state = -1;
-                                    }); // -> declining the quest
-                                    return;
-                                }
-                            }
-                        }
-                    }
-                    else
-                    {
-                        this.message = new SequencedString(questerEntity.questSpeech + "", 245, this.font.width(questerEntity.questSpeech) / 2, 2000); // -> first time talking to the npc
-                        test = new TexturedIconButton(acceptButton, posX + 800, posY + 800, 32, 32, new TranslationTextComponent(""), b ->
-                        {
-                            //just a button to remove the giant black square
-                        });
-                        acceptbutton = new TexturedIconButton(acceptButton, posX + 10, posY + 230, 32, 32, new TranslationTextComponent(""), b ->
-                        {
-                            this.questData.addInProgressQuest(quest);
-                            PacketHandler.sendToServer(new CUpdateQuestStatePacket(quest));
-                            PacketHandler.sendToServer(new CRequestSyncQuestDataPacket());
-                            this.state = 1;
-                            this.message = new SequencedString(questerEntity.acceptanceSpeech + "", 245, this.font.width(questerEntity.decliningSpeech) / 2, 2000);
-                        }); // -> accepting the quest
-                        declinebutton = new TexturedIconButton(declineButton, posX + 180, posY + 230, 32, 32, new TranslationTextComponent(""), b ->
-                        {
-                            this.message = new SequencedString(questerEntity.decliningSpeech + "", 245, this.font.width(questerEntity.decliningSpeech) / 2, 2000);
-                            this.state = -1;
-                        }); // -> declining the quest
-                        return;
-                    }
-                }
+                    this.questData.addInProgressQuest(firstQuest);
+                    PacketHandler.sendToServer(new CUpdateQuestStatePacket(firstQuest));
+                    PacketHandler.sendToServer(new CRequestSyncQuestDataPacket());
+                    this.state = 1;
+                    this.message = new SequencedString(questerEntity.acceptanceSpeech + "", 245, this.font.width(questerEntity.decliningSpeech) / 2, 2000);
+                }); // -> accepting the quest
+                declinebutton = new TexturedIconButton(declineButton, posX + 180, posY + 230, 32, 32, new TranslationTextComponent(""), b ->
+                {
+                    this.message = new SequencedString(questerEntity.decliningSpeech + "", 245, this.font.width(questerEntity.decliningSpeech) / 2, 2000);
+                    this.state = -1;
+                }); // -> declining the quest
             }
         }
-        */
-
     }
     @Override
     public void render(MatrixStack matrixStack, int x, int y, float f) {
