@@ -70,16 +70,26 @@ public class CUpdateQuestStatePacket
 				IQuestData props = QuestDataCapability.get(player);
 				Quest quest = GameRegistry.findRegistry(Quest.class).getValue(new ResourceLocation(message.questId));
 
-				if (props.hasInProgressQuest(quest) && props.getInProgressQuest(quest).isComplete() && props.getInProgressQuest(quest).triggerCompleteEvent(player))
+				boolean updateClient = false;
+
+				// If we're trying to accept the quest make sure we don't already have it in progress, otherwise if we're trying to finish one make sure we do have it in progress and its complete
+				if(props.hasInProgressQuest(quest) && props.getInProgressQuest(quest).isComplete() && props.getInProgressQuest(quest).triggerCompleteEvent(player))
 				{
 					props.addFinishedQuest(quest);
 					props.removeInProgressQuest(quest);
+					updateClient = true;
 				}
-				else if (!props.hasInProgressQuest(quest) && quest.triggerStartEvent(player))
+				else if(!props.hasInProgressQuest(quest) && quest.triggerStartEvent(player))
+				{
 					props.addInProgressQuest(quest);
+					updateClient = true;
+				}
 
-				PacketHandler.sendTo(new SSyncQuestDataPacket(player.getId(), props), player);
-				PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), AbilityDataCapability.get(player)), player);
+				if(updateClient)
+				{
+					PacketHandler.sendTo(new SSyncQuestDataPacket(player.getId(), props), player);
+					PacketHandler.sendTo(new SSyncAbilityDataPacket(player.getId(), AbilityDataCapability.get(player)), player);
+				}
 			});
 		}
 		ctx.get().setPacketHandled(true);

@@ -63,17 +63,18 @@ public abstract class QuesterEntity extends CreatureEntity {
             return ActionResultType.PASS;
         if (!player.level.isClientSide)
         {
-            IQuestData questData = QuestDataCapability.get(player); // TODO issue here, maybe???
+            IQuestData questData = QuestDataCapability.get(player);
             Quest[] quests = questData.getInProgressQuests();
             for (int i = 0; i < quests.length; i++)
             {
                 if (questData.getInProgressQuest(i) != null && questData.getInProgressQuest(i).triggerCompleteEvent(player) && questList.contains(questData.getInProgressQuest(i)))
                 {
+                    //System.out.println("Check 1");
                     questData.addFinishedQuest(quests[i]);
                     questData.removeInProgressQuest(quests[i]);
-                    PacketHandler.sendTo(new SSyncQuestDataPacket(player.getId(), questData), player);
                 }
             }
+            PacketHandler.sendTo(new SSyncQuestDataPacket(player.getId(), questData), player);
             PacketHandler.sendTo(new SOpenChatPromptScreenPacket(this.getId()), player);
         }
         return ActionResultType.PASS;

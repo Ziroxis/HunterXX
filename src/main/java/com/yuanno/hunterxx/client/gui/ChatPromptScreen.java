@@ -35,7 +35,6 @@ public class ChatPromptScreen extends Screen {
     private final ResourceLocation acceptButton = new ResourceLocation(Main.MODID, "textures/gui/questacceptbutton.png");
 
     private int state = 0;
-    private int questInQuestion = 0;
     private QuesterEntity questerEntity;
 
     private IQuestData questData;
@@ -65,10 +64,6 @@ public class ChatPromptScreen extends Screen {
     public void init()
     {
         super.init();
-        PacketHandler.sendToServer(new CRequestSyncWorldDataPacket());
-        PacketHandler.sendToServer(new CRequestSyncQuestDataPacket());
-        Quest questHaveToDo = questerEntity.questPreviouslyDone;
-        Quest npcQuest = questerEntity.questGiving;
         guiLeft = (this.width - this.xSize) / 2;
         guiTop = (this.height - this.ySize) / 2;
         int posX = (this.width - 256) / 2;
@@ -131,7 +126,6 @@ public class ChatPromptScreen extends Screen {
             {
                 this.questData.addInProgressQuest(firstQuest);
                 PacketHandler.sendToServer(new CUpdateQuestStatePacket(firstQuest));
-                PacketHandler.sendToServer(new CRequestSyncQuestDataPacket());
                 this.state = 1;
                 this.message = new SequencedString(questerEntity.acceptanceSpeech + "", 245, this.font.width(questerEntity.decliningSpeech) / 2, 2000);
             }); // -> accepting the quest
@@ -157,7 +151,6 @@ public class ChatPromptScreen extends Screen {
                     {
                         this.questData.addInProgressQuest(questerEntity.questList.get((int) amountPermanent));
                         PacketHandler.sendToServer(new CUpdateQuestStatePacket(questerEntity.questList.get((int) amountPermanent)));
-                        PacketHandler.sendToServer(new CRequestSyncQuestDataPacket());
                         this.state = 1;
                         this.message = new SequencedString(questerEntity.acceptanceSpeech + "", 245, this.font.width(questerEntity.decliningSpeech) / 2, 2000);
                     }); // -> accepting the quest
@@ -183,7 +176,6 @@ public class ChatPromptScreen extends Screen {
                 {
                     this.questData.addInProgressQuest(firstQuest);
                     PacketHandler.sendToServer(new CUpdateQuestStatePacket(firstQuest));
-                    PacketHandler.sendToServer(new CRequestSyncQuestDataPacket());
                     this.state = 1;
                     this.message = new SequencedString(questerEntity.acceptanceSpeech + "", 245, this.font.width(questerEntity.decliningSpeech) / 2, 2000);
                 }); // -> accepting the quest
