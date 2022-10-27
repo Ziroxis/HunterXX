@@ -8,10 +8,7 @@ import com.yuanno.hunterxx.api.TexturedIconButton;
 import com.yuanno.hunterxx.data.quest.IQuestData;
 import com.yuanno.hunterxx.data.quest.QuestDataCapability;
 import com.yuanno.hunterxx.entity.questers.QuesterEntity;
-import com.yuanno.hunterxx.init.ModQuests;
 import com.yuanno.hunterxx.networking.PacketHandler;
-import com.yuanno.hunterxx.networking.client.CRequestSyncQuestDataPacket;
-import com.yuanno.hunterxx.networking.client.CRequestSyncWorldDataPacket;
 import com.yuanno.hunterxx.networking.client.CUpdateQuestStatePacket;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.screen.Screen;
@@ -23,9 +20,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.gui.GuiUtils;
 
-import java.io.FilterOutputStream;
 import java.util.Arrays;
-import java.util.HashSet;
 
 @OnlyIn(Dist.CLIENT)
 public class ChatPromptScreen extends Screen {
@@ -97,9 +92,21 @@ public class ChatPromptScreen extends Screen {
             {
                 for (int ia = 0; ia < questerEntity.questList.size(); ia++)
                 {
-                    if (questerEntity.questList.get(ia) != null && questData.getInProgressQuest(i).getId().equals(questerEntity.questList.get(ia).getId())) {
-                        this.message = new SequencedString(questerEntity.ongoingSpeech + "", 245, this.font.width(questerEntity.questSpeech) / 2, 2000); // -> first time talking to the npc
-                        return;
+                    if (questerEntity.questList.get(ia) != null && questData.getInProgressQuest(i).getId().equals(questerEntity.questList.get(ia).getId()))
+                    {
+                        if (questerEntity.questList.get(ia) != null && !questData.hasFinishedQuest(questerEntity.questList.get(ia)) && questerEntity.questList.get(ia).isComplete())
+                        {
+                            questData.addFinishedQuest(questerEntity.questList.get(ia));
+                            questData.removeFinishedQuest(questerEntity.questList.get(ia));
+                            questData.removeInProgressQuest(questerEntity.questList.get(ia));
+                            PacketHandler.sendToServer(new CUpdateQuestStatePacket(questerEntity.questList.get(ia)));
+                            this.message = new SequencedString(questerEntity.doneSpeech + "", 245, this.font.width(questerEntity.questSpeech) / 2, 2000); // -> first time talking to the npc
+                            return;
+                        }
+                        else {
+                            this.message = new SequencedString(questerEntity.ongoingSpeech + "", 245, this.font.width(questerEntity.questSpeech) / 2, 2000); // -> first time talking to the npc
+                            return;
+                        }
                     }
                 }
             }
@@ -107,7 +114,7 @@ public class ChatPromptScreen extends Screen {
         }
 
         int amountPermanent = amount;
-        //System.out.println(amountPermanent);
+        System.out.println(amountPermanent);
         //System.out.println(questerEntity.questList.size());
         if (amountPermanent >= questerEntity.questList.size())
         {
