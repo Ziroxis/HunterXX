@@ -115,8 +115,7 @@ public class ChatPromptScreen extends Screen {
 
         int amountPermanent = amount;
         System.out.println(amountPermanent);
-        //System.out.println(questerEntity.questList.size());
-        if (amountPermanent >= questerEntity.questList.size())
+        if (questData.hasFinishedQuest(questerEntity.questList.get(questerEntity.questList.size() - 1))) // TODO check if you got the id of the latest quest
         {
             this.message = new SequencedString(questerEntity.doneSpeech + "", 245, this.font.width(questerEntity.questSpeech) / 2, 2000); // -> first time talking to the npc
             return;

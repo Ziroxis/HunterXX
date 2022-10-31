@@ -61,6 +61,8 @@ public class ClientHandler {
         if(layers != null)
         {
             layers.add(new BasicTransmutationRenderer<>(renderer));
+            layers.add(new JajankenRockModelRenderer<>(renderer));
+            layers.add(new JajankenScissorsModelRenderer<>(renderer));
             layers.add(new TenModelRenderer<>(renderer));
             layers.add(new GyoModelRenderer<>(renderer));
             layers.add(new KenModelRenderer<>(renderer));

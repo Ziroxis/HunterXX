@@ -36,6 +36,8 @@ public class Main
         ModAbilities.register(modEventBus);
         ModQuests.QUESTS.register(modEventBus);
         ModBlocks.BLOCKS.register(modEventBus);
+        ModParticleTypes.PARTICLE_TYPES.register(modEventBus);
+
 
 
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
