@@ -9,7 +9,7 @@ public class EntityBasicKillingQuest6 extends QuesterEntity {
     public EntityBasicKillingQuest6(EntityType type, World world)
     {
         super(type, world);
-        this.questGiving = ModQuests.BASICKILLINGQUEST6;
+        this.questList.add(ModQuests.BASICKILLINGQUEST6);
         this.questSpeech = "Could you kill the wither for me? I don't like his head. I mean heads..";
         this.acceptanceSpeech = "Thanks, won't have to see it anymore";
         this.decliningSpeech = "Beast hunter it is";

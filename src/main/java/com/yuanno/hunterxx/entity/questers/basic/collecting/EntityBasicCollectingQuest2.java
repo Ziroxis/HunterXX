@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 public class EntityBasicCollectingQuest2 extends QuesterEntity {
     public EntityBasicCollectingQuest2(EntityType type, World world) {
         super(type, world);
-        this.questGiving = ModQuests.BASICCOLLECTINGQUEST2;
+        this.questList.add(ModQuests.BASICCOLLECTINGQUEST2);
         this.questSpeech = "I'd like to make bread... Could you get me wheat?";
         this.acceptanceSpeech = "You can take your time, but not too much";
         this.decliningSpeech = "Guess I'll find someone else..";

@@ -10,7 +10,7 @@ public class EntityLicenseQuest extends QuesterEntity {
     public EntityLicenseQuest(EntityType type, World world)
     {
         super(type, world);
-        this.questGiving = ModQuests.HUNTER_LICENSE;
+        this.questList.add(ModQuests.HUNTER_LICENSE);
         this.questSpeech = "So you want to become a true hunter huh?";
         this.acceptanceSpeech = "Do what I asked and you'll get your hunter license";
         this.decliningSpeech = "The hunter lifestyle ain't made for everyone, can't blame you";

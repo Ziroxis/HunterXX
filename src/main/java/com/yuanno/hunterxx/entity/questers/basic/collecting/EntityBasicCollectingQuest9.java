@@ -9,7 +9,7 @@ import net.minecraft.world.World;
 public class EntityBasicCollectingQuest9 extends QuesterEntity {
     public EntityBasicCollectingQuest9(EntityType type, World world) {
         super(type, world);
-        this.questGiving = ModQuests.BASICCOLLECTINGQUEST9;
+        this.questList.add(ModQuests.BASICCOLLECTINGQUEST9);
         this.questSpeech = "Always wished to fly... Could you get me wings!";
         this.acceptanceSpeech = "Finally! Someone willing to do this";
         this.decliningSpeech = "Are there 'wing' hunters or something I could hire?";

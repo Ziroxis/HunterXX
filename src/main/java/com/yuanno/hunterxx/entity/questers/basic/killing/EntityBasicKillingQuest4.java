@@ -9,7 +9,7 @@ public class EntityBasicKillingQuest4 extends QuesterEntity {
     public EntityBasicKillingQuest4(EntityType type, World world)
     {
         super(type, world);
-        this.questGiving = ModQuests.BASICKILLINGQUEST4;
+        this.questList.add(ModQuests.BASICKILLINGQUEST4);
         this.questSpeech = "I keep getting poisoned by these damn witches, can you take care of them?";
         this.acceptanceSpeech = "Thanks, good luck with it by the way";
         this.decliningSpeech = "I'll have to find an antidote then for when I'm poisoned again";

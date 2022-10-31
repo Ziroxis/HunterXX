@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 public class EntityBasicCollectingQuest5 extends QuesterEntity {
     public EntityBasicCollectingQuest5(EntityType type, World world) {
         super(type, world);
-        this.questGiving = ModQuests.BASICCOLLECTINGQUEST5;
+        this.questList.add(ModQuests.BASICCOLLECTINGQUEST5);
         this.questSpeech = "I'm a mineral hunter, could you get me diamonds so I can research them?";
         this.acceptanceSpeech = "Thanks, won't have to do it myself.";
         this.decliningSpeech = "I'll get them myself then I guess.";

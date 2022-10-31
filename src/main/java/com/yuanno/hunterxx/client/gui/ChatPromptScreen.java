@@ -20,6 +20,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.gui.GuiUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 @OnlyIn(Dist.CLIENT)
@@ -43,7 +44,7 @@ public class ChatPromptScreen extends Screen {
 
     TexturedIconButton acceptbutton;
     TexturedIconButton declinebutton;
-
+    ArrayList<String> alreadyDoneQuestID = new ArrayList<String>();
     public ChatPromptScreen(PlayerEntity player, QuesterEntity questerEntity)
     {
         super(new StringTextComponent(""));
@@ -81,8 +82,9 @@ public class ChatPromptScreen extends Screen {
         {
             for (int ia = 0; ia < questerEntity.questList.size(); ia++)
             {
-                if (questData.getFinishedQuests().get(i).getId().equals(questerEntity.questList.get(ia).getId())) {
+                if (questData.getFinishedQuests().get(i).getId().equals(questerEntity.questList.get(ia).getId()) && !alreadyDoneQuestID.contains(questerEntity.questList.get(ia).getId())) {
                     amount++;
+                    alreadyDoneQuestID.add(questerEntity.questList.get(ia).getId());
                 }
             }
         }
@@ -115,7 +117,7 @@ public class ChatPromptScreen extends Screen {
 
         int amountPermanent = amount;
         System.out.println(amountPermanent);
-        if (questData.hasFinishedQuest(questerEntity.questList.get(questerEntity.questList.size() - 1))) // TODO check if you got the id of the latest quest
+        if (amountPermanent >= questerEntity.questList.size()) // TODO check if you got the id of the latest quest
         {
             this.message = new SequencedString(questerEntity.doneSpeech + "", 245, this.font.width(questerEntity.questSpeech) / 2, 2000); // -> first time talking to the npc
             return;

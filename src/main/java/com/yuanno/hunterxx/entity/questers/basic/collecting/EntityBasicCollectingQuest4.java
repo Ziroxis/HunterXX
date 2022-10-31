@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 public class EntityBasicCollectingQuest4 extends QuesterEntity {
     public EntityBasicCollectingQuest4(EntityType type, World world) {
         super(type, world);
-        this.questGiving = ModQuests.BASICCOLLECTINGQUEST4;
+        this.questList.add(ModQuests.BASICCOLLECTINGQUEST4);
         this.questSpeech = "I want a weapon, but don't like swords. Can you get me something else?";
         this.acceptanceSpeech = "Please, I want to protect myself from a distance!";
         this.decliningSpeech = "I'll just die then.";

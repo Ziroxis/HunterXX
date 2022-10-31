@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 public class EntityBasicCollectingQuest8 extends QuesterEntity {
     public EntityBasicCollectingQuest8(EntityType type, World world) {
         super(type, world);
-        this.questGiving = ModQuests.BASICCOLLECTINGQUEST8;
+        this.questList.add(ModQuests.BASICCOLLECTINGQUEST8);
         this.questSpeech = "I'd like to eat a legendary apple, could you get me it?";
         this.acceptanceSpeech = "Take your time.";
         this.decliningSpeech = "Guess it's gonna have to be a professional herbal hunter then";

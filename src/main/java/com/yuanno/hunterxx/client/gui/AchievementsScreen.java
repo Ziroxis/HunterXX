@@ -22,6 +22,7 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.gui.GuiUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
@@ -85,15 +86,24 @@ public class AchievementsScreen extends Screen {
         minecraft.getTextureManager().bind(questScreen);
         GuiUtils.drawTexturedModalRect((int) ((scaledWidth / 2) - 128), 0, 0, 0, 256, 256, 0);
         IQuestData questProps = QuestDataCapability.get(this.player);
+        ArrayList<String> alreadyDoneQuestID = new ArrayList<String>();
+        List<Quest> doneQuest = new ArrayList<Quest>();
+        for (int i = 0; i < questProps.getFinishedQuests().size(); i++)
+        {
+            if (!alreadyDoneQuestID.contains(questProps.getFinishedQuests().get(i).getId()))
+            {
+                doneQuest.add(questProps.getFinishedQuests().get(i));
+                alreadyDoneQuestID.add(questProps.getFinishedQuests().get(i).getId());
+            }
+        }
 
-        List<Quest> questsCompleted = questProps.getFinishedQuests();
         int E = 0;
         int D = 0;
         int C = 0;
         int B = 0;
         int A = 0;
         int S = 0;
-        for (Quest quest : questsCompleted) {
+        for (Quest quest : doneQuest) {
             switch (quest.getRank()) {
                 case ModValues.E_RANK:
                     E += 1;

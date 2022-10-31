@@ -8,7 +8,7 @@ import net.minecraft.world.World;
 public class EntityBasicCollectingQuest7 extends QuesterEntity {
     public EntityBasicCollectingQuest7(EntityType type, World world) {
         super(type, world);
-        this.questGiving = ModQuests.BASICCOLLECTINGQUEST7;
+        this.questList.add(ModQuests.BASICCOLLECTINGQUEST7);
         this.questSpeech = "I'm a collector, but professional hunters cost so much... Could you get me something?";
         this.acceptanceSpeech = "Thanks! I'll pay you good.";
         this.decliningSpeech = "Guess I'll have to get a professional hunter then.";

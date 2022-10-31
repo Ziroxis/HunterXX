@@ -9,7 +9,7 @@ public class EntityBasicKillingQuest3 extends QuesterEntity {
     public EntityBasicKillingQuest3(EntityType type, World world)
     {
         super(type, world);
-        this.questGiving = ModQuests.BASICKILLINGQUEST3;
+        this.questList.add(ModQuests.BASICKILLINGQUEST3);
         this.questSpeech = "Can't reach those damn skelly things! Could you take care of them for me please?";
         this.acceptanceSpeech = "Thanks, let me know when you're done";
         this.decliningSpeech = "I'll take up my bow and do it myself!";
