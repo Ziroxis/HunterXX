@@ -10,7 +10,6 @@ public class EntityBasicCollectingQuest1 extends QuesterEntity {
     public EntityBasicCollectingQuest1(EntityType type, World world) {
         super(type, world);
         this.questList.add(ModQuests.BASICCOLLECTINGQUEST1);
-        //this.questGiving = ModQuests.BASICCOLLECTINGQUEST1;
         this.questSpeech = "I'm so hungry... Could you get me some porkchops please?";
         this.acceptanceSpeech = "Please hurry! I'm so hungry!";
         this.decliningSpeech = "I'll starve to death then...";

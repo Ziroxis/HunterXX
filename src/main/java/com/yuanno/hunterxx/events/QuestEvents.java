@@ -2,6 +2,7 @@ package com.yuanno.hunterxx.events;
 
 import com.yuanno.hunterxx.Main;
 import com.yuanno.hunterxx.api.Quest.Objective;
+import com.yuanno.hunterxx.api.ability.AbilityUseEvent;
 import com.yuanno.hunterxx.data.quest.IQuestData;
 import com.yuanno.hunterxx.data.quest.QuestDataCapability;
 import com.yuanno.hunterxx.data.quest.objectives.*;
@@ -22,6 +23,7 @@ import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.living.PotionEvent;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
+import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.LogicalSide;
@@ -67,7 +69,6 @@ public class QuestEvents
         }
     }
 
-    /*
     @SubscribeEvent
     public static void onPlayerAbilityUse(AbilityUseEvent event)
     {
@@ -90,12 +91,6 @@ public class QuestEvents
         }
     }
 
-     */
-
-    /* INFO(wynd) - If the player shift clicks from the brewing stand UI the ItemStack returned from BrewingStandContainer::transferStackInSlot WILL BE EMPTY (air).
-     * This happens because the itemstack of the slot is returned, which is emptied and transfered to the player's inventory before the method is called. Meaning the event receives the itemstack of an empty slot.
-     * For now it should be avoided to make an objective based specifically on an item type and focus more on the effects of the potions which are consistently returned.
-     */
     @SubscribeEvent
     public static void onPlayerBrews(PlayerBrewedPotionEvent event)
     {
@@ -169,6 +164,24 @@ public class QuestEvents
                 {
                     obj.alterProgress(1);
                     PacketHandler.sendTo(new SSyncQuestDataPacket(player.getId(), questProps), player);
+                }
+            }
+        }
+    }
+
+    @SubscribeEvent
+    public static void blockBreakEvent(BlockEvent.BreakEvent event)
+    {
+        PlayerEntity player = event.getPlayer();
+        IQuestData questData = QuestDataCapability.get(player);
+        for (Objective obj : questData.getInProgressObjectives())
+        {
+            if (obj instanceof IBreakBlocksObjective)
+            {
+                if (((IBreakBlocksObjective) obj).checkBreakBlock(player, event.getState().getBlock()))
+                {
+                    obj.alterProgress(1);
+                    PacketHandler.sendTo(new SSyncQuestDataPacket(player.getId(), questData), player);
                 }
             }
         }

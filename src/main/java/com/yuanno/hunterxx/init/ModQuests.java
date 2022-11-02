@@ -5,6 +5,7 @@ import com.yuanno.hunterxx.api.Beapi;
 import com.yuanno.hunterxx.api.Quest.Objective;
 import com.yuanno.hunterxx.api.Quest.Quest;
 import com.yuanno.hunterxx.api.Quest.QuestRegistry;
+import com.yuanno.hunterxx.quests.advanced_nen.ShuQuest;
 import com.yuanno.hunterxx.quests.basic.collecting.*;
 import com.yuanno.hunterxx.quests.basic.killing.*;
 import com.yuanno.hunterxx.quests.nen.HunterLicenseQuest;
@@ -51,6 +52,8 @@ public class ModQuests {
     public static final Quest HUNTER_LICENSE = new HunterLicenseQuest();
     public static final Quest UNLOCK_NEN = new UnlockingNenQuest();
     public static final Quest[] HUNTER_LICENSE_QUESTS = new Quest[] {HUNTER_LICENSE, UNLOCK_NEN};
+    public static final  Quest SHU_QUEST = new ShuQuest();
+    public static final Quest[] ADVANCED_NEN = new Quest[] {SHU_QUEST};
     static
     {
         for (Quest quest : BASICCOLLECTINGQUEST)
@@ -81,6 +84,18 @@ public class ModQuests {
 
         }
         for (Quest quest : HUNTER_LICENSE_QUESTS)
+        {
+            String resourceName = Beapi.getResourceName(quest.getId());
+            langMap.put("quest." + Main.MODID + "." + resourceName, quest.getTitle());
+
+            for(Objective obj : quest.getObjectives())
+            {
+                langMap.put("quest.objective." + Main.MODID + "." + obj.getId(), obj.getTitle());
+            }
+
+            QUESTS.register(resourceName, () -> quest);
+        }
+        for (Quest quest : ADVANCED_NEN)
         {
             String resourceName = Beapi.getResourceName(quest.getId());
             langMap.put("quest." + Main.MODID + "." + resourceName, quest.getTitle());
