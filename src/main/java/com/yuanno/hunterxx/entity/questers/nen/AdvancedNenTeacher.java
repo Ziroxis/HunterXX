@@ -16,6 +16,8 @@ public class AdvancedNenTeacher extends QuesterEntity {
         this.questList.add(ModQuests.EN_QUEST);
         this.questList.add(ModQuests.RYU_SHU_QUEST);
 
+        this.prerequisite = true;
+
         this.denialSpeechPreviousQuest = "You should maybe first learn the basics no?";
         this.questSpeech = "You're interested in learning advanced nen stuff??";
         this.acceptanceSpeech = "Go follow my teachings";

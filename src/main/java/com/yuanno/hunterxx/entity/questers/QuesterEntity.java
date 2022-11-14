@@ -31,6 +31,7 @@ public abstract class QuesterEntity extends CreatureEntity {
     public String ongoingSpeech;
     public String doneSpeech;
     public Quest questPrerequisite;
+    public boolean prerequisite;
     public List<Quest> questList = new ArrayList<Quest>();
     public QuesterEntity(EntityType type, World world)
     {

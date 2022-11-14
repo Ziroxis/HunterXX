@@ -1,7 +1,9 @@
 package com.yuanno.hunterxx.world.structure.structures;
 
 import com.yuanno.hunterxx.Main;
+import com.yuanno.hunterxx.entity.questers.license.EntityLicenseQuest;
 import net.minecraft.block.BlockState;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SharedSeedRandom;
 import net.minecraft.util.math.BlockPos;
@@ -34,7 +36,7 @@ public class BlimpStructure extends Structure<NoFeatureConfig> {
     protected boolean isFeatureChunk(ChunkGenerator chunkGenerator, net.minecraft.world.biome.provider.BiomeProvider biomeSource, long seed, SharedSeedRandom chunkRandom, int chunkX, int chunkZ, Biome biome, ChunkPos chunkPos, NoFeatureConfig featureConfig) {
         BlockPos centerOfChunk = new BlockPos((chunkX << 4) + 7, 0, (chunkZ << 4) + 7);
         int landHeight = chunkGenerator.getFirstOccupiedHeight(centerOfChunk.getX(), centerOfChunk.getZ(),
-                Heightmap.Type.WORLD_SURFACE_WG);
+                Heightmap.Type.WORLD_SURFACE);
 
         IBlockReader columnOfBlocks = chunkGenerator.getBaseColumn(centerOfChunk.getX(), centerOfChunk.getZ());
         BlockState topBlock = columnOfBlocks.getBlockState(centerOfChunk.above(landHeight));

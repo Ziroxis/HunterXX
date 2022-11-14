@@ -88,10 +88,13 @@ public class ChatPromptScreen extends Screen {
                 }
             }
         }
-        if (alreadyDoneQuestID.isEmpty() || !alreadyDoneQuestID.contains(questerEntity.questPrerequisite.getId()))
+        if (questerEntity.prerequisite)
         {
-            this.message = new SequencedString(questerEntity.denialSpeechPreviousQuest + "", 245, this.font.width(questerEntity.questSpeech) / 2, 2000);
-            return;
+            if (alreadyDoneQuestID.isEmpty() || !alreadyDoneQuestID.contains(questerEntity.questPrerequisite.getId())) {
+                System.out.println(questerEntity.questPrerequisite);
+                this.message = new SequencedString(questerEntity.denialSpeechPreviousQuest + "", 245, this.font.width(questerEntity.questSpeech) / 2, 2000);
+                return;
+            }
         }
         for (int i = 0; i < questData.getInProgressQuests().length; i++) {
             if (questData.getInProgressQuest(i) != null)
