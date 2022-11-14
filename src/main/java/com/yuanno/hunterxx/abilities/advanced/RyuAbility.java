@@ -19,7 +19,7 @@ public class RyuAbility extends ContinuousAbility {
     public static final UUID getRyuUUIDDefense = UUID.fromString("02f9b372-44e6-11ed-b878-0242ac120002");
     public RyuAbility()
     {
-        super("Kyu", AbilityCategories.AbilityCategory.ADVANCED_NEN);
+        super("Ryu", AbilityCategories.AbilityCategory.ADVANCED_NEN);
         this.setDescription("Mainly focuses ones aura in the fist.\nRest of the aura is used to protect yourself");
         this.setMaxCooldown(3);
         this.setauraCost(15);

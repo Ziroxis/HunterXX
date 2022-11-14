@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.yuanno.hunterxx.Main;
 import com.yuanno.hunterxx.world.structure.structures.BlimpStructure;
+import com.yuanno.hunterxx.world.structure.structures.WingHouseStructure;
 import net.minecraft.util.registry.WorldGenRegistries;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.structure.Structure;
@@ -37,7 +38,7 @@ public class ModStructures
      *   So it is best to keep your structure names the same as long as you can instead of changing them frequently.
      */
     public static final RegistryObject<Structure<NoFeatureConfig>> BLIMP = DEFERRED_REGISTRY_STRUCTURE.register("blimp", BlimpStructure::new);
-
+    public static final RegistryObject<Structure<NoFeatureConfig>> WINGHOUSE = DEFERRED_REGISTRY_STRUCTURE.register("winghouse", WingHouseStructure::new);
 
     /**
      * This is where we set the rarity of your structures and determine if land conforms to it.
@@ -50,7 +51,12 @@ public class ModStructures
                         10 /* minimum distance apart in chunks between spawn attempts. MUST BE LESS THAN ABOVE VALUE*/,
                         1234567890 /* this modifies the seed of the structure so no two structures always spawn over each-other. Make this large and unique. */),
                 true);
-
+        setupMapSpacingAndLand(
+                WINGHOUSE.get(), /* The instance of the structure */
+                new StructureSeparationSettings(20 /* average distance apart in chunks between spawn attempts */,
+                        10 /* minimum distance apart in chunks between spawn attempts. MUST BE LESS THAN ABOVE VALUE*/,
+                        1234567890 /* this modifies the seed of the structure so no two structures always spawn over each-other. Make this large and unique. */),
+                true);
 
     }
 

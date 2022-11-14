@@ -15,6 +15,7 @@ public class ConfiguredStructures
      * Static instance of our structure so we can reference it and add it to biomes easily.
      */
     public static StructureFeature<?, ?> CONFIGURED_BLIMP = ModStructures.BLIMP.get().configured(IFeatureConfig.NONE);
+    public static StructureFeature<?, ?> CONFIGURED_WINGHOUSE = ModStructures.WINGHOUSE.get().configured(IFeatureConfig.NONE);
 
 
 
@@ -29,6 +30,7 @@ public class ConfiguredStructures
     public static void registerConfiguredStructures() {
         Registry<StructureFeature<?, ?>> registry = WorldGenRegistries.CONFIGURED_STRUCTURE_FEATURE;
         Registry.register(registry, new ResourceLocation(Main.MODID, "blimp"), CONFIGURED_BLIMP);
+        Registry.register(registry, new ResourceLocation(Main.MODID, "winghouse"), CONFIGURED_WINGHOUSE);
 
 
         /* Ok so, this part may be hard to grasp but basically, just add your structure to this to
@@ -47,6 +49,7 @@ public class ConfiguredStructures
          * Requires AccessTransformer ( see resources/META-INF/accesstransformer.cfg )
          */
         FlatGenerationSettings.STRUCTURE_FEATURES.put(ModStructures.BLIMP.get(), CONFIGURED_BLIMP);
+        FlatGenerationSettings.STRUCTURE_FEATURES.put(ModStructures.WINGHOUSE.get(), CONFIGURED_WINGHOUSE);
 
     }
 }

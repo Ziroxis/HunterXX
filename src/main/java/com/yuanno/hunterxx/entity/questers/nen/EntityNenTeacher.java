@@ -11,6 +11,8 @@ public class EntityNenTeacher extends QuesterEntity {
     {
         super(type, world);
         this.questList.add(ModQuests.UNLOCK_NEN);
+        this.prerequisite = true;
+        this.questPrerequisite = ModQuests.HUNTER_LICENSE;
         this.denialSpeechPreviousQuest = "You should first pass the hunter exam bozu";
         this.questSpeech = "You're interested in learning something new kid?";
         this.acceptanceSpeech = "Do what I asked and you'll be on your way to master a new kind of strength";

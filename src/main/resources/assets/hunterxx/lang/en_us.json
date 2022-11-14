@@ -2,5 +2,23 @@
   "gui.hunterxx.stats": "Stats",
   "gui.hunterxx.quests": "Quests",
   "gui.hunterxx.achievements": "Achievements",
-  "gui.hunterxx.abilities": "Abilities"
+  "gui.hunterxx.abilities": "Abilities",
+
+  "ability.hunterxx.basic_enhancement": "Basic enhancement",
+  "ability.hunterxx.basic_emission": "Basic emission",
+  "ability.hunterxx.basic_transmutation": "Basic transmutation",
+  "ability.hunterxx.basic_conjuration": "Basic conjuration",
+  "ability.hunterxx.basic_manipulation": "Basic manipulation",
+
+  "ability.hunterxx.ten": "Ten",
+  "ability.hunterxx.ren": "Ren",
+  "ability.hunterxx.zetsu": "Zetsu",
+
+  "ability.hunterxx.gyo": "Gyo",
+  "ability.hunterxx.in": "In",
+  "ability.hunterxx.en": "En",
+  "ability.hunterxx.shu": "Shu",
+  "ability.hunterxx.ko": "Ko",
+  "ability.hunterxx.ken": "Ken",
+  "ability.hunterxx.kyu": "Kyu"
 }
