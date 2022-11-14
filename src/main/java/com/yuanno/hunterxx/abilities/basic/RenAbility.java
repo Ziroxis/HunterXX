@@ -14,7 +14,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import java.util.UUID;
 
 public class RenAbility extends ContinuousAbility implements IParallelContinuousAbility {
-    public static final Ability INSTANCE = new RenAbility();
+    public static final RenAbility INSTANCE = new RenAbility();
 
     private static final AttributeModifier REN_ABILITY = new AttributeModifier(UUID.fromString("9d5dcf38-428a-11ed-b878-0242ac120002"),
             "Ren", 5, AttributeModifier.Operation.ADDITION);

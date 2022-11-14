@@ -141,6 +141,15 @@ public class QuestEvents
                         PacketHandler.sendTo(new SSyncQuestDataPacket(player.getId(), questProps), player);
                     }
                 }
+                if (obj instanceof IContinuousAbilityObjective)
+                {
+                    if (((IContinuousAbilityObjective) obj).checkContinuesTimeAbility(player))
+                    {
+                        obj.alterProgress(1);
+                        System.out.println(obj.getProgress());
+                        PacketHandler.sendTo(new SSyncQuestDataPacket(player.getId(), questProps), player);
+                    }
+                }
             }
         }
     }
@@ -204,6 +213,23 @@ public class QuestEvents
                     {
                         obj.alterProgress(1);
                         PacketHandler.sendTo(new SSyncQuestDataPacket(player.getId(), questProps), player);
+                    }
+                }
+            }
+        }
+        if (event.getEntityLiving() instanceof PlayerEntity && event.getSource().getEntity() instanceof LivingEntity&& !event.getSource().getEntity().level.isClientSide)
+        {
+            PlayerEntity playerHit = (PlayerEntity) event.getEntityLiving();
+            IQuestData questProps = QuestDataCapability.get(playerHit);
+
+            for (Objective obj : questProps.getInProgressObjectives())
+            {
+                if (obj instanceof ITakeHitsObjective)
+                {
+                    if (((ITakeHitsObjective) obj).checkHit(playerHit, playerHit, event.getSource(), event.getAmount()))
+                    {
+                        obj.alterProgress(1);
+                        PacketHandler.sendTo(new SSyncQuestDataPacket(playerHit.getId(), questProps), playerHit);
                     }
                 }
             }

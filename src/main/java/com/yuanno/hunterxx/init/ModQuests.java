@@ -5,7 +5,7 @@ import com.yuanno.hunterxx.api.Beapi;
 import com.yuanno.hunterxx.api.Quest.Objective;
 import com.yuanno.hunterxx.api.Quest.Quest;
 import com.yuanno.hunterxx.api.Quest.QuestRegistry;
-import com.yuanno.hunterxx.quests.advanced_nen.ShuQuest;
+import com.yuanno.hunterxx.quests.advanced_nen.*;
 import com.yuanno.hunterxx.quests.basic.collecting.*;
 import com.yuanno.hunterxx.quests.basic.killing.*;
 import com.yuanno.hunterxx.quests.nen.HunterLicenseQuest;
@@ -52,8 +52,14 @@ public class ModQuests {
     public static final Quest HUNTER_LICENSE = new HunterLicenseQuest();
     public static final Quest UNLOCK_NEN = new UnlockingNenQuest();
     public static final Quest[] HUNTER_LICENSE_QUESTS = new Quest[] {HUNTER_LICENSE, UNLOCK_NEN};
+    public static final Quest GYO_QUEST = new GyoQuest();
+    public static final Quest IN_QUEST = new InQuest();
     public static final  Quest SHU_QUEST = new ShuQuest();
-    public static final Quest[] ADVANCED_NEN = new Quest[] {SHU_QUEST};
+    public static final Quest KEN_QUEST = new KenQuest();
+    public static final Quest KO_QUEST = new KoQuest();
+    public static final Quest EN_QUEST = new EnQuest();
+    public static final Quest RYU_SHU_QUEST = new RyuShuQuest();
+    public static final Quest[] ADVANCED_NEN = new Quest[] {GYO_QUEST, IN_QUEST, SHU_QUEST, KEN_QUEST, KO_QUEST, EN_QUEST, RYU_SHU_QUEST};
     static
     {
         for (Quest quest : BASICCOLLECTINGQUEST)

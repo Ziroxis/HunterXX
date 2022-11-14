@@ -2,6 +2,7 @@ package com.yuanno.hunterxx.setup;
 
 import com.mojang.brigadier.CommandDispatcher;
 import com.yuanno.hunterxx.Main;
+import com.yuanno.hunterxx.api.Quest.Quest;
 import com.yuanno.hunterxx.commands.*;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -15,6 +16,7 @@ public class ForgeSetup {
     {
         CommandDispatcher dispatcher = event.getServer().getCommands().getDispatcher();
 
+        QuestCommand.register(dispatcher);
         AuraCommand.register(dispatcher);
         PointsCommand.register(dispatcher);
         AbilityCommand.register(dispatcher);
