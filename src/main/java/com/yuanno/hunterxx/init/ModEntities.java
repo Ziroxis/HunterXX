@@ -5,6 +5,7 @@ import com.yuanno.hunterxx.entity.hostile.FoxBearEntity;
 import com.yuanno.hunterxx.entity.questers.basic.collecting.*;
 import com.yuanno.hunterxx.entity.questers.basic.killing.*;
 import com.yuanno.hunterxx.entity.questers.license.EntityLicenseQuest;
+import com.yuanno.hunterxx.entity.questers.nen.AdvancedNenTeacher;
 import com.yuanno.hunterxx.entity.questers.nen.EntityNenTeacher;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
@@ -139,6 +140,13 @@ public class ModEntities {
                             .sized(1f, 2f)
                             .setTrackingRange(5)
                             .build(new ResourceLocation(Main.MODID, "entitynenteacher").toString()));
+
+    public static final RegistryObject<EntityType<AdvancedNenTeacher>> ADVANCEDNENTEACHER = ENTITIES
+            .register("advancednenteacher",
+                    () -> EntityType.Builder.of(AdvancedNenTeacher::new, EntityClassification.CREATURE)
+                            .sized(1f, 2f)
+                            .setTrackingRange(5)
+                            .build(new ResourceLocation(Main.MODID, "advancednenteacher").toString()));
 
     public static final RegistryObject<EntityType<FoxBearEntity>> FOXBEAR = ENTITIES
             .register("foxbear",

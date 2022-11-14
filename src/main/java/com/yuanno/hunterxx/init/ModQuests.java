@@ -59,7 +59,7 @@ public class ModQuests {
     public static final Quest KO_QUEST = new KoQuest();
     public static final Quest EN_QUEST = new EnQuest();
     public static final Quest RYU_SHU_QUEST = new RyuShuQuest();
-    public static final Quest[] ADVANCED_NEN = new Quest[] {GYO_QUEST, IN_QUEST, SHU_QUEST, KEN_QUEST, KO_QUEST, EN_QUEST, RYU_SHU_QUEST};
+    public static final Quest[] ADVANCED_NEN = new Quest[] {GYO_QUEST, IN_QUEST, KO_QUEST, EN_QUEST, RYU_SHU_QUEST};
     static
     {
         for (Quest quest : BASICCOLLECTINGQUEST)

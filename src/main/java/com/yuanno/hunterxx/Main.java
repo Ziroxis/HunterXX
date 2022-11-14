@@ -4,6 +4,7 @@ import com.yuanno.hunterxx.client.gui.NenBarOverlay;
 import com.yuanno.hunterxx.client.handler.ClientHandler;
 import com.yuanno.hunterxx.data.AttachingCapability;
 import com.yuanno.hunterxx.init.*;
+import com.yuanno.hunterxx.world.structure.configured.ConfiguredStructures;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -37,6 +38,7 @@ public class Main
         ModQuests.QUESTS.register(modEventBus);
         ModBlocks.BLOCKS.register(modEventBus);
         ModParticleTypes.PARTICLE_TYPES.register(modEventBus);
+        ModStructures.DEFERRED_REGISTRY_STRUCTURE.register(modEventBus);
 
 
 
@@ -52,6 +54,11 @@ public class Main
     {
         ModCapabilities.init();
         ModNetwork.init();
+        event.enqueueWork(() ->
+        {
+            ModStructures.setupStructures();
+            ConfiguredStructures.registerConfiguredStructures();
+        });
     }
 
     private void doClientStuff(final FMLClientSetupEvent event)

@@ -46,6 +46,7 @@ public class ClientHandler {
 
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.ENTITYLICENSEQUEST.get(), new EntityLicenseQuestRenderer.Factory());
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.ENTITYNENTEACHER.get(), new UnlockingNenEntityRenderer.Factory());
+        RenderingRegistry.registerEntityRenderingHandler(ModEntities.ADVANCEDNENTEACHER.get(), new AdvancedNenRenderer.Factory());
 
         RenderingRegistry.registerEntityRenderingHandler(ModEntities.FOXBEAR.get(), new FoxBearRenderer.Factory());
         Map<String, PlayerRenderer> playerSkinMap = Minecraft.getInstance().getEntityRenderDispatcher().getSkinMap();

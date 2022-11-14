@@ -515,7 +515,7 @@ public class Beapi
             Template template;
             try
             {
-                template = templatemanager.get(res);
+                template = templatemanager.getOrCreate(res);
             }
             catch (ResourceLocationException ex)
             {
@@ -527,6 +527,7 @@ public class Beapi
             toIgnore.add(Blocks.BEDROCK);
             //.add(Blocks.WATER);
             takeBlocksFromWorld(template, world, pos, size, toIgnore);
+            template.fillFromWorld(serverworld, pos, size, true, Blocks.STRUCTURE_VOID);
             template.setAuthor("?");
             try
             {
@@ -543,11 +544,10 @@ public class Beapi
         }
     }
 
-    public static boolean loadNBTStructure(ServerWorld world, String name, BlockPos pos)
+    public static boolean loadNBTStructure(ServerWorld world, String name, BlockPos pos, PlacementSettings settings)
     {
         if (!world.isClientSide)
         {
-            BlockPos blockpos = pos;
             TemplateManager templatemanager = world.getStructureManager();
             ResourceLocation res = new ResourceLocation(Main.MODID, name);
 
@@ -568,17 +568,13 @@ public class Beapi
             }
             else
             {
-                BlockState blockstate = world.getBlockState(blockpos);
-                world.sendBlockUpdated(blockpos, blockstate, blockstate, 3);
+                BlockState blockstate = world.getBlockState(pos);
+                world.sendBlockUpdated(pos, blockstate, blockstate, 3);
             }
 
-            PlacementSettings placementsettings = (new PlacementSettings()).setMirror(Mirror.NONE).setRotation(Rotation.NONE).setIgnoreEntities(true).setChunkPos((ChunkPos) null);
-            placementsettings.clearProcessors()
-                    .addProcessor(BlockIgnoreStructureProcessor.STRUCTURE_AND_AIR)
-                    .addProcessor(new IntegrityProcessor(1f)).setRandom(new Random(Util.getMillis()));
             //placementsettings.clearProcessors().addProcessor(new BlockIgnoreStructureProcessor(ImmutableList.of(Blocks.SAND)));
 
-            template.placeInWorldChunk(world, pos, placementsettings, new Random(Util.getMillis()));
+            template.placeInWorldChunk(world, pos, settings, new Random(Util.getMillis()));
             return true;
         }
         else

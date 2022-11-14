@@ -24,15 +24,13 @@ import java.util.List;
 
 public abstract class QuesterEntity extends CreatureEntity {
 
-    public Quest questPreviouslyDone;
-    public boolean previousQuestObliged = false;
     public String denialSpeechPreviousQuest;
-    public Quest questGiving;
     public String questSpeech;
     public String acceptanceSpeech;
     public String decliningSpeech;
     public String ongoingSpeech;
     public String doneSpeech;
+    public Quest questPrerequisite;
     public List<Quest> questList = new ArrayList<Quest>();
     public QuesterEntity(EntityType type, World world)
     {

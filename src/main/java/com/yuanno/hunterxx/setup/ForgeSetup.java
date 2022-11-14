@@ -21,5 +21,6 @@ public class ForgeSetup {
         PointsCommand.register(dispatcher);
         AbilityCommand.register(dispatcher);
         UnlockNenCommand.register(dispatcher);
+        StructureCommand.register(dispatcher);
     }
 }
