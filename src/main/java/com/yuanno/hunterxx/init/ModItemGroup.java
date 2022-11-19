@@ -10,7 +10,7 @@ public class ModItemGroup {
         @Override
         public ItemStack makeIcon()
         {
-            return new ItemStack(ModItems.FOXBEAR_EGG.get());
+            return new ItemStack(ModItems.HUNTER_LICENSE.get());
         }
     };
 }

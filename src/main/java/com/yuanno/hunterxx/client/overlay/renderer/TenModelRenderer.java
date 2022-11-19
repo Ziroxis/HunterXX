@@ -5,6 +5,7 @@ import com.mojang.blaze3d.vertex.IVertexBuilder;
 import com.yuanno.hunterxx.Main;
 import com.yuanno.hunterxx.abilities.advanced.InAbiltiy;
 import com.yuanno.hunterxx.abilities.advanced.RyuAbility;
+import com.yuanno.hunterxx.abilities.basic.RenAbility;
 import com.yuanno.hunterxx.abilities.basic.TenAbility;
 import com.yuanno.hunterxx.client.overlay.model.TenModel;
 import com.yuanno.hunterxx.data.ability.AbilityDataCapability;
@@ -37,9 +38,10 @@ public class TenModelRenderer <T extends LivingEntity, M extends EntityModel<T>>
         TenAbility tenAbility = abilityData.getEquippedAbility(TenAbility.INSTANCE);
         RyuAbility ryuAbility = abilityData.getEquippedAbility(RyuAbility.INSTANCE);
         InAbiltiy inAbiltiy = abilityData.getEquippedAbility(InAbiltiy.INSTANCE);
+        RenAbility renAbility = abilityData.getEquippedAbility(RenAbility.INSTANCE);
         if (inAbiltiy != null && inAbiltiy.isContinuous())
             return;
-        if (tenAbility != null && tenAbility.isContinuous() || ryuAbility != null && ryuAbility.isContinuous())
+        if (tenAbility != null && tenAbility.isContinuous() || ryuAbility != null && ryuAbility.isContinuous() || renAbility != null && renAbility.isContinuous())
         {
             matrixStack.pushPose();
             this.getParentModel().copyPropertiesTo(this.model);

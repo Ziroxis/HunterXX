@@ -8,6 +8,7 @@ import com.yuanno.hunterxx.api.Quest.QuestRegistry;
 import com.yuanno.hunterxx.quests.advanced_nen.*;
 import com.yuanno.hunterxx.quests.basic.collecting.*;
 import com.yuanno.hunterxx.quests.basic.killing.*;
+import com.yuanno.hunterxx.quests.basic_hatsu.*;
 import com.yuanno.hunterxx.quests.nen.HunterLicenseQuest;
 import com.yuanno.hunterxx.quests.nen.UnlockingNenQuest;
 import net.minecraftforge.registries.DeferredRegister;
@@ -55,11 +56,16 @@ public class ModQuests {
     public static final Quest GYO_QUEST = new GyoQuest();
     public static final Quest IN_QUEST = new InQuest();
     public static final  Quest SHU_QUEST = new ShuQuest();
-    public static final Quest KEN_QUEST = new KenQuest();
     public static final Quest KO_QUEST = new KoQuest();
     public static final Quest EN_QUEST = new EnQuest();
-    public static final Quest RYU_SHU_QUEST = new RyuShuQuest();
-    public static final Quest[] ADVANCED_NEN = new Quest[] {GYO_QUEST, IN_QUEST, KO_QUEST, EN_QUEST, RYU_SHU_QUEST};
+    public static final Quest RYU_KEN_QUEST = new RyuKenQuest();
+    public static final Quest[] ADVANCED_NEN = new Quest[] {GYO_QUEST, IN_QUEST, KO_QUEST , SHU_QUEST, EN_QUEST, RYU_KEN_QUEST};
+    public static final Quest BASIC_ENHANCEMENT = new BasicEnhancementQuest();
+    public static final Quest BASIC_TRANSMUTATION = new BasicTransmutationQuest();
+    public static final Quest BASIC_EMISSION = new BasicEmissionQuest();
+    public static final Quest BASIC_CONJURATION = new BasicConjurationQuest();
+    public static final Quest BASIC_MANIPULATION = new BasicManipulationQuest();
+    public static final Quest[] BASIC_HATSU = new Quest[] {BASIC_ENHANCEMENT, BASIC_TRANSMUTATION, BASIC_EMISSION, BASIC_CONJURATION, BASIC_MANIPULATION};
     static
     {
         for (Quest quest : BASICCOLLECTINGQUEST)
@@ -102,6 +108,19 @@ public class ModQuests {
             QUESTS.register(resourceName, () -> quest);
         }
         for (Quest quest : ADVANCED_NEN)
+        {
+            String resourceName = Beapi.getResourceName(quest.getId());
+            langMap.put("quest." + Main.MODID + "." + resourceName, quest.getTitle());
+
+            for(Objective obj : quest.getObjectives())
+            {
+                langMap.put("quest.objective." + Main.MODID + "." + obj.getId(), obj.getTitle());
+            }
+
+            QUESTS.register(resourceName, () -> quest);
+
+        }
+        for (Quest quest : BASIC_HATSU)
         {
             String resourceName = Beapi.getResourceName(quest.getId());
             langMap.put("quest." + Main.MODID + "." + resourceName, quest.getTitle());

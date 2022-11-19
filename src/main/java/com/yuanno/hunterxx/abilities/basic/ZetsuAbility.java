@@ -27,7 +27,7 @@ public class ZetsuAbility extends ContinuousAbility {
         IAbilityData iAbilityData = AbilityDataCapability.get(player);
         for (int i = 0; i < iAbilityData.getEquippedAbilities().length; i++)
         {
-            if (iAbilityData.getEquippedAbility(i).isContinuous() && iAbilityData.getEquippedAbility(i) != this)
+            if (iAbilityData.getEquippedAbility(i) != null && iAbilityData.getEquippedAbility(i).isContinuous() && iAbilityData.getEquippedAbility(i) != this)
                 iAbilityData.getEquippedAbility(i).cooldown(player);
         }
         return true;

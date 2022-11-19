@@ -8,11 +8,13 @@ import com.yuanno.hunterxx.init.ModValues;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.nbt.CompoundNBT;
+import net.minecraft.util.ResourceLocation;
 
 public class BasicConjurerAbility extends ItemAbility {
 
     public static final BasicConjurerAbility INSTANCE = new BasicConjurerAbility();
-
+    public CompoundNBT nbt = new CompoundNBT();
     public BasicConjurerAbility()
     {
         super("Basic conjuration", AbilityCategories.AbilityCategory.HATSU);
@@ -26,20 +28,34 @@ public class BasicConjurerAbility extends ItemAbility {
     {
         IEntityStats entityStats = EntityStatsCapability.get(player);
         String category = entityStats.getCategory();
+        ItemStack conjuredSword;
+        //stack.setTag(nbt);
+        //stack.getOrCreateTagElement("conujured");
         switch (category) {
             case ModValues.CONJURATION:
-                return new ItemStack(Items.DIAMOND_SWORD);
+                conjuredSword = new ItemStack(Items.DIAMOND_SWORD);
+                break;
             case ModValues.TRANSMUTATION:
             case ModValues.SPECIALIST:
-                return new ItemStack(Items.IRON_SWORD);
+                conjuredSword = new ItemStack(Items.IRON_SWORD);
+                break;
             case ModValues.MANIPULATION:
             case ModValues.ENHANCEMENT:
-                return new ItemStack(Items.STONE_SWORD);
+                conjuredSword = new ItemStack(Items.STONE_SWORD);
+                break;
             case ModValues.EMISSION:
-                return new ItemStack(Items.WOODEN_SWORD);
+                conjuredSword = new ItemStack(Items.WOODEN_SWORD);
+                break;
             default:
-                return new ItemStack(Items.STONE);
+                conjuredSword = new ItemStack(Items.STONE);
         }
+        //nbt.putString("Basic sword", "conjured");
+        //conjuredSword.getOrCreateTagElement("Conjured basic");
+        //conjuredSword.setTag(nbt);
+        //conjuredSword.addTagElement("test", INSTANCE.nbt);
+        //conjuredSword.getItem().getTags().add(ResourceLocation.tryParse("test"));
+        conjuredSword.getTag().putString("conjuration", "basic sword");
+        return conjuredSword;
     }
 
     @Override

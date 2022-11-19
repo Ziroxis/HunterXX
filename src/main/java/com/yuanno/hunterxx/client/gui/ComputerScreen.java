@@ -27,13 +27,18 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.client.gui.GuiUtils;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 @OnlyIn(Dist.CLIENT)
 public class ComputerScreen extends Screen {
     private PlayerEntity player;
     private IEntityStats entityStats;
     private final ResourceLocation background = new ResourceLocation(Main.MODID, "textures/gui/img.png");
-    private NoTextureButton buyButton;
+    private NoTextureButton buyButtonDiamond;
+    private NoTextureButton buyButtonIron;
+    private NoTextureButton buyButtonCoal;
+    ArrayList<NoTextureButton> buttons = new ArrayList<NoTextureButton>();
+
     int state = 0;
     public ComputerScreen(PlayerEntity player)
     {
@@ -43,7 +48,6 @@ public class ComputerScreen extends Screen {
         assert this.player != null;
         this.entityStats = EntityStatsCapability.get(player);
     }
-
 
 
 
@@ -62,15 +66,36 @@ public class ComputerScreen extends Screen {
             state = 1;
         else
             state = 0;
-        buyButton = new NoTextureButton(posX - 15, posY - 73, 16, 16, new TranslationTextComponent("Buy"), (btn) ->
+
+        buyButtonDiamond = new NoTextureButton(posX - 15, posY - 73, 16, 16, new TranslationTextComponent("Buy"), (btn) ->
         {
-            System.out.println("You bought a diamond");
-            entityStats.alterJenny(-150);
+            entityStats.alterJenny(-buyButtonDiamond.number);
             PacketHandler.sendToServer(new CGiveItemStackPacket(new ItemStack(Items.DIAMOND)));
             PacketHandler.sendToServer(new CSyncentityStatsPacket(entityStats));
         });
-        if (state == 1)
-            this.addButton(buyButton);
+        buyButtonIron = new NoTextureButton(posX - 15, posY - 55, 16, 16, new TranslationTextComponent("Buy"), (btn) ->
+        {
+            entityStats.alterJenny(-buyButtonIron.number);
+            PacketHandler.sendToServer(new CGiveItemStackPacket(new ItemStack(Items.IRON_INGOT)));
+            PacketHandler.sendToServer(new CSyncentityStatsPacket(entityStats));
+        });
+        buyButtonCoal = new NoTextureButton(posX - 15, posY - 37, 16, 16, new TranslationTextComponent("Buy"), (btn) ->
+        {
+            entityStats.alterJenny(-buyButtonCoal.number);
+            PacketHandler.sendToServer(new CGiveItemStackPacket(new ItemStack(Items.COAL)));
+            PacketHandler.sendToServer(new CSyncentityStatsPacket(entityStats));
+        });
+        if (state == 1) {
+            this.addButton(buyButtonDiamond);
+            this.addButton(buyButtonIron);
+            this.addButton(buyButtonCoal);
+            buttons.add(buyButtonDiamond);
+            buttons.add(buyButtonIron);
+            buttons.add(buyButtonCoal);
+            buyButtonDiamond.number = 150;
+            buyButtonIron.number = 10;
+            buyButtonCoal.number = 1;
+        }
     }
 
     @Override
@@ -88,13 +113,20 @@ public class ComputerScreen extends Screen {
         }
         else
         {
-            this.renderItem(new ItemStack(Items.DIAMOND.asItem()), posX - 90, posY - 75);
-            Beapi.drawStringWithBorder(this.font, matrixStack, "Price: 150", posX - 70, posY - 70, -1);
-            if (entityStats.getJenny() >= 100)
-                buyButton.active = true;
-            else
-                buyButton.active = false;
 
+            // TODO add more stuff to get for computer
+            this.renderItem(new ItemStack(Items.DIAMOND.asItem()), posX - 90, posY - 75);
+            this.renderItem(new ItemStack(Items.IRON_INGOT.asItem()), posX - 90, posY - 57);
+            this.renderItem(new ItemStack(Items.COAL.asItem()), posX - 90, posY - 39);
+            //Beapi.drawStringWithBorder(this.font, matrixStack, "Price: 150", posX - 70, posY - 70, -1);
+            for (int i = 0; i < buttons.size(); i++)
+            {
+                Beapi.drawStringWithBorder(this.font, matrixStack, "Price: " + buttons.get(i).number, posX - 70, posY - 70 + (i * 18), -1);
+                if (buttons.get(i).number >= entityStats.getJenny())
+                    buttons.get(i).active = false;
+                else
+                    buttons.get(i).active = true;
+            }
         }
         super.render(matrixStack, x, y, f);
     }

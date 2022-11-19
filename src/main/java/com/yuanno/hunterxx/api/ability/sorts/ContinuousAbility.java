@@ -135,8 +135,9 @@ public abstract class ContinuousAbility extends Ability {
             if((this.isClientSide() || !player.level.isClientSide) && !this.isStateForced())
                 this.duringContinuityEvent.duringContinuity(player, this.continueTime);
 
-            if(this.threshold > 0 && this.continueTime >= this.threshold || propsEntity.getAura() < getauraCost() + 10 && !(getauraCost() == 0))
+            if(this.threshold > 0 && this.continueTime >= this.threshold || propsEntity.getAura() < getauraCost() + 20 && !(getauraCost() == 0)) {
                 this.endContinuity(player);
+            }
             if (player.tickCount % 20 == 0)
             {
                 if (propsEntity.getLevel() < getExperienceGainLevelCap())
@@ -145,8 +146,11 @@ public abstract class ContinuousAbility extends Ability {
                     ExperienceUpEvent eventExperience = new ExperienceUpEvent(player, getExperiencePoint());
                     MinecraftForge.EVENT_BUS.post(eventExperience);
                 }
-                if (propsEntity.getAura() > getauraCost())
-                    propsEntity.alterAura((int) - getauraCost());
+                if (propsEntity.getAura() > getauraCost()) {
+                    propsEntity.alterAura((int) -getauraCost());
+                }
+                else
+                    this.endContinuity(player);
             }
             PacketHandler.sendTo(new AuraSync(propsEntity.getAura()), player);
             PacketHandler.sendTo(new SSyncEntityStatsPacket(player.getId(), propsEntity), player);

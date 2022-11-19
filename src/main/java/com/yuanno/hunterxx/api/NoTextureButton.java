@@ -12,7 +12,7 @@ public class NoTextureButton extends Button
 {
 	private boolean isSelected;
 	private boolean isFake;
-
+	public int number;
 	private String onHoverTextColor = "#00FFBB";
 	
 	public NoTextureButton(int posX, int posY, int width, int height, ITextComponent string, IPressable onPress)

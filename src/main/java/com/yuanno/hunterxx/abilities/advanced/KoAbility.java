@@ -3,6 +3,7 @@ package com.yuanno.hunterxx.abilities.advanced;
 import com.yuanno.hunterxx.api.Beapi;
 import com.yuanno.hunterxx.api.ability.AbilityCategories;
 import com.yuanno.hunterxx.api.ability.sorts.ContinuousAbility;
+import com.yuanno.hunterxx.init.ModAttributes;
 import com.yuanno.hunterxx.init.ModValues;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -21,12 +22,13 @@ public class KoAbility extends ContinuousAbility {
         super("Ko", AbilityCategories.AbilityCategory.ADVANCED_NEN);
         this.setDescription("Focuses all your aura in your fist.\nLeaving you invulnerable for attacks.\nDealing massive damage");
         this.setMaxCooldown(3);
-        this.setauraCost(15);
+        this.setauraCost(10);
         this.setExperience(15);
         this.setExperienceGainLevelCap(30);
 
         this.onStartContinuityEvent = this::onStartContinuityEvent;
         this.duringContinuityEvent = this::duringContinuityEvent;
+        this.onStopContinuityEvent = this::onStopContinuityEvent;
         this.onEndContinuityEvent = this::onEndContinuityEvent;
     }
 
@@ -35,8 +37,15 @@ public class KoAbility extends ContinuousAbility {
 
         AttributeModifier koModifier = new AttributeModifier(koUUID, "Ko", 20 * Beapi.valueCategory(player, ModValues.ENHANCEMENT), AttributeModifier.Operation.ADDITION);
         if (player.getMainHandItem().isEmpty()) {
-            player.getAttribute(Attributes.ATTACK_DAMAGE).addTransientModifier(koModifier);
-            return true;
+            if (!player.getAttribute(Attributes.ATTACK_DAMAGE).hasModifier(koModifier))
+            {
+                player.getAttribute(Attributes.ATTACK_DAMAGE).addTransientModifier(koModifier);
+                return true;
+            }
+            else {
+                player.getAttribute(Attributes.ATTACK_DAMAGE).removeModifier(koModifier);
+                return false;
+            }
         }
         else
             return false;
@@ -50,9 +59,16 @@ public class KoAbility extends ContinuousAbility {
         }
     }
 
+
+    public void onStopContinuityEvent(PlayerEntity player)
+    {
+        player.getAttribute(ModAttributes.ATTACK_RANGE.get()).removeModifier(koUUID);
+    }
+
     private boolean onEndContinuityEvent(PlayerEntity player)
     {
         player.getAttribute(Attributes.ATTACK_DAMAGE).removeModifier(koUUID);
+        System.out.println("CHECK");
         return true;
     }
 }

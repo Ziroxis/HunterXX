@@ -83,7 +83,7 @@ public class CAttributePacket {
                 else if (msg.attributes == 4)
                 {
                     UUID speedUUID = speed_attributemodifier_uuid;
-                    AttributeModifier speedModifier = new AttributeModifier(speedUUID, "speedStatIncrease", entityStats.getSpeed() * 0.05, AttributeModifier.Operation.ADDITION);
+                    AttributeModifier speedModifier = new AttributeModifier(speedUUID, "speedStatIncrease", entityStats.getSpeed() * 0.01, AttributeModifier.Operation.ADDITION);
 
                     speed.removeModifier(speedModifier);
                     speed.addPermanentModifier(speedModifier);

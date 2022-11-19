@@ -23,7 +23,7 @@ public class ModItems {
     public static final RegistryObject<Item> HUNTER_LICENSE = ITEMS.register("hunter_license", HunterLicenseItem::new);
 
     //SPAWN EGGS
-    public static final RegistryObject<SpawnEggItem> FOXBEAR_EGG = ITEMS.register("foxbear_egg",
-            () -> new ModSpawnEggItem(ModEntities.FOXBEAR, 0x879995, 0x576ABC, new Item.Properties().tab(ModItemGroup.MISC)));
+    //public static final RegistryObject<SpawnEggItem> FOXBEAR_EGG = ITEMS.register("foxbear_egg",
+          //  () -> new ModSpawnEggItem(ModEntities.FOXBEAR, 0x879995, 0x576ABC, new Item.Properties().tab(ModItemGroup.MISC)));
 
 }

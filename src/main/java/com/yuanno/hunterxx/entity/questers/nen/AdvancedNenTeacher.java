@@ -14,7 +14,9 @@ public class AdvancedNenTeacher extends QuesterEntity {
         this.questList.add(ModQuests.IN_QUEST);
         this.questList.add(ModQuests.KO_QUEST);
         this.questList.add(ModQuests.EN_QUEST);
-        this.questList.add(ModQuests.RYU_SHU_QUEST);
+        this.questList.add(ModQuests.SHU_QUEST);
+        this.questList.add(ModQuests.RYU_KEN_QUEST);
+        this.questPrerequisite = ModQuests.UNLOCK_NEN;
 
         this.prerequisite = true;
 

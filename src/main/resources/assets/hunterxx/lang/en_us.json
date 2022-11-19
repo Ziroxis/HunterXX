@@ -1,4 +1,7 @@
 {
+  "block.hunterxx.computer": "Computer",
+  "item.hunterxx.foxbear_fur": "Foxbear fur",
+
   "gui.hunterxx.stats": "Stats",
   "gui.hunterxx.quests": "Quests",
   "gui.hunterxx.achievements": "Achievements",
@@ -20,5 +23,5 @@
   "ability.hunterxx.shu": "Shu",
   "ability.hunterxx.ko": "Ko",
   "ability.hunterxx.ken": "Ken",
-  "ability.hunterxx.kyu": "Kyu"
+  "ability.hunterxx.ryu": "Ryu"
 }

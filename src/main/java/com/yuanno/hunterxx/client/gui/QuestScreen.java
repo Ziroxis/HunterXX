@@ -100,7 +100,8 @@ public class QuestScreen extends Screen {
                 drawString(matrixStack, font, "Quest: ", guiLeft - 40 , guiTop - 80 + (i * 50), 16777215);
                 drawString(matrixStack, font, questInProgressString, guiLeft - 5, guiTop - 80 + (i * 50), 16777215);
                 List<Objective> objectives = questInProgress.getObjectives();
-                drawString(matrixStack, font, "Rank: " + questInProgress.getRank(), guiLeft - 40, guiTop - 60 + (i * 50) + (objectives.size() * 8), 16777215);
+                if (!questInProgress.getRank().equals(""))
+                    drawString(matrixStack, font, "Rank: " + questInProgress.getRank(), guiLeft - 40, guiTop - 60 + (i * 50) + (objectives.size() * 8), 16777215);
                 if (quests[i].isComplete())
                 {
                     drawString(matrixStack, font, TextFormatting.BOLD + "DONE", guiLeft - 40 , guiTop - 50 + (i * 50) + (objectives.size() * 8), 16777215);

@@ -13,20 +13,22 @@ import java.util.Random;
 import java.util.function.Supplier;
 
 public class CStatsCCPacket {
-    private int levelPoints, health, strength, defense, speed;
+    private int levelPoints, health, strength, defense, speed, maxAura, auraRegen;
 
     public CStatsCCPacket()
     {
 
     }
 
-    public CStatsCCPacket(int levelPoints, int health, int strength, int defense, int speed)
+    public CStatsCCPacket(int levelPoints, int health, int strength, int defense, int speed, int maxAura, int auraRegen)
     {
         this.levelPoints = levelPoints;
         this.health = health;
         this.strength = strength;
         this.defense = defense;
         this.speed = speed;
+        this.maxAura = maxAura;
+        this.auraRegen = auraRegen;
     }
 
     public void encode(PacketBuffer buffer)
@@ -36,6 +38,8 @@ public class CStatsCCPacket {
         buffer.writeInt(this.strength);
         buffer.writeInt(this.defense);
         buffer.writeInt(this.speed);
+        buffer.writeInt(this.maxAura);
+        buffer.writeInt(this.auraRegen);
     }
 
     public static CStatsCCPacket decode(PacketBuffer buffer)
@@ -46,6 +50,9 @@ public class CStatsCCPacket {
         msg.strength = buffer.readInt();
         msg.defense = buffer.readInt();
         msg.speed = buffer.readInt();
+        msg.maxAura = buffer.readInt();
+        msg.auraRegen = buffer.readInt();
+
         return msg;
     }
 
@@ -64,6 +71,9 @@ public class CStatsCCPacket {
                 entityStats.setStrength(message.strength);
                 entityStats.setDefense(message.defense);
                 entityStats.setSpeed(message.speed);
+                entityStats.setMaxAura(message.maxAura);
+                entityStats.setAuraRegeneration(message.auraRegen);
+
 
                 PacketHandler.sendToAllTrackingAndSelf(new SSyncEntityStatsPacket(player.getId(), entityStats), player);
 
