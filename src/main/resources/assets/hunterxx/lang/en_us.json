@@ -1,6 +1,8 @@
 {
+  "itemGroup.hunterxx_miscTab": "HunterXX",
   "block.hunterxx.computer": "Computer",
   "item.hunterxx.foxbear_fur": "Foxbear fur",
+  "item.hunterxx.hunter_license": "Hunter license",
 
   "gui.hunterxx.stats": "Stats",
   "gui.hunterxx.quests": "Quests",

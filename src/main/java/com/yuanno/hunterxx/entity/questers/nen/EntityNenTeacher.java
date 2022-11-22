@@ -19,6 +19,5 @@ public class EntityNenTeacher extends QuesterEntity {
         this.decliningSpeech = "I gues not everyone is interested in strength";
         this.ongoingSpeech = "Come back when you're done with what I asked";
         this.doneSpeech = "My teachings end here younging.";
-
     }
 }

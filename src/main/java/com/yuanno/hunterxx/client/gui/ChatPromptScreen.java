@@ -44,7 +44,6 @@ public class ChatPromptScreen extends Screen {
 
     TexturedIconButton acceptbutton;
     TexturedIconButton declinebutton;
-    ArrayList<String> alreadyDoneQuestID = new ArrayList<String>();
     public ChatPromptScreen(PlayerEntity player, QuesterEntity questerEntity)
     {
         super(new StringTextComponent(""));
@@ -75,6 +74,7 @@ public class ChatPromptScreen extends Screen {
     }
     public void loop(int posX, int posY)
     {
+        ArrayList<String> alreadyDoneQuestID = new ArrayList<String>();
         System.out.println(questData.getFinishedQuests());
         System.out.println(Arrays.toString(questData.getInProgressQuests()));
         int amount = 0;
@@ -82,7 +82,8 @@ public class ChatPromptScreen extends Screen {
         {
             for (int ia = 0; ia < questerEntity.questList.size(); ia++)
             {
-                if (questData.getFinishedQuests().get(i).getId().equals(questerEntity.questList.get(ia).getId()) && !alreadyDoneQuestID.contains(questerEntity.questList.get(ia).getId())) {
+                if (questData.getFinishedQuests().get(i).getId().equals(questerEntity.questList.get(ia).getId()) && !alreadyDoneQuestID.contains(questerEntity.questList.get(ia).getId()))
+                {
                     amount++;
                     alreadyDoneQuestID.add(questerEntity.questList.get(ia).getId());
                 }
@@ -90,10 +91,21 @@ public class ChatPromptScreen extends Screen {
         }
         if (questerEntity.prerequisite)
         {
-            if (alreadyDoneQuestID.isEmpty() || !alreadyDoneQuestID.contains(questerEntity.questPrerequisite.getId())) {
-                System.out.println(questerEntity.questPrerequisite);
+            ArrayList<String> alreadyDoneQuestIDPrerequisite = new ArrayList<String>();
+            System.out.println(alreadyDoneQuestID);
+            System.out.println(amount);
+            for (int i = 0; i < questData.getFinishedQuests().size(); i++)
+            {
+                if (!alreadyDoneQuestIDPrerequisite.contains(questData.getFinishedQuests().get(i).getId()))
+                {
+                    alreadyDoneQuestIDPrerequisite.add(questData.getFinishedQuests().get(i).getId());
+                }
+            }
+            if (!alreadyDoneQuestIDPrerequisite.contains(questerEntity.questPrerequisite.getId()))
+            {
                 this.message = new SequencedString(questerEntity.denialSpeechPreviousQuest + "", 245, this.font.width(questerEntity.questSpeech) / 2, 2000);
                 return;
+
             }
         }
         for (int i = 0; i < questData.getInProgressQuests().length; i++) {

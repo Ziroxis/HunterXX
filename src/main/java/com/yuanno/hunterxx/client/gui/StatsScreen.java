@@ -145,8 +145,11 @@ public class StatsScreen extends Screen {
             this.addButton(defense);
             this.addButton(strength);
             this.addButton(speed);
-            this.addButton(maxAura);
-            this.addButton(auraRegen);
+            if (entityStats.getHasNen())
+            {
+                this.addButton(maxAura);
+                this.addButton(auraRegen);
+            }
         }
 
 
